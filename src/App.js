@@ -1,4 +1,3 @@
-"use strict";
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import "./App.css";
@@ -11,8 +10,10 @@ function App() {
 		availability: "",
 		queryLocation: "",
 	});
-	const [bool, setBool] = useState(true);
-	const [cpResult, setCpResult] = useState({});
+	// const [bool, setBool] = useState(true);
+	// const [cpResult, setCpResult] = useState({});
+
+	const api = process.env.REACT_APP_API_KEY; //(process.env)// in vercel need to specify as .env file is ignored
 
 	const urlLocation = `https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q=${queryCpObj.queryLocation}`;
 	const urlAvailability = `https://api.data.gov.sg/v1/transport/carpark-availability`;
@@ -28,9 +29,10 @@ function App() {
 				});
 			});
 		});
-		setBool(!bool);
+		// setBool(!bool);
 	}, [queryCpObj.queryLocation]);
 
+	console.log(api);
 	console.log(queryCpObj.availability);
 	console.log(queryCpObj.location);
 
@@ -64,7 +66,7 @@ function App() {
 	// 	setCpResult(result);
 	// }, [bool]);
 
-	console.log("after", cpResult);
+	// console.log("after", cpResult);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
