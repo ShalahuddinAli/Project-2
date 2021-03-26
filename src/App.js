@@ -1,8 +1,10 @@
 import axios from "axios";
+import { Route, Link, Switch } from "react-router-dom";
+
 import React, { useState, useEffect } from "react";
 import "./App.css";
-// import availData from "./components/test_data";
-// import queryData from "./components/data_test";
+import NavBar from "./components/NavBar/Nav";
+import SearchBar from "./components/SearchBar/SearchBar";
 
 function App() {
 	const [queryCpObj, setQueryCpObj] = useState({
@@ -10,92 +12,83 @@ function App() {
 		availability: "",
 		queryLocation: "",
 	});
-	// const [bool, setBool] = useState(true);
-	// const [cpResult, setCpResult] = useState({});
+	const [cpResult, setCpResult] = useState([]);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const api = process.env.REACT_APP_API_KEY; //(process.env)// in vercel need to specify as .env file is ignored
-
-	const urlLocation = `https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q=${queryCpObj.queryLocation}`;
-	const urlAvailability = `https://api.data.gov.sg/v1/transport/carpark-availability`;
+	// const api = process.env.REACT_APP_API_KEY; //(process.env)// in vercel need to specify as .env file is ignored
 
 	useEffect(() => {
-		axios.get(urlLocation).then((res) => {
-			setQueryCpObj({ ...queryCpObj, location: res.data.result.records });
+		if (queryCpObj.queryLocation) {
+			console.log("wwwww");
+			setIsLoading(true);
+			const requestLocation = axios.get(
+				`https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q={"address":"${queryCpObj.queryLocation}"}`
+			);
+			const requestAvailability = axios.get(
+				`https://api.data.gov.sg/v1/transport/carpark-availability`
+			);
 
-			axios.get(urlAvailability).then((res) => {
-				setQueryCpObj({
-					...queryCpObj,
-					availability: res.data.items[0].carpark_data,
-				});
-			});
-		});
-		// setBool(!bool);
+			axios.all([requestLocation, requestAvailability]).then(
+				axios.spread((...res) => {
+					setQueryCpObj({
+						...queryCpObj,
+						location: res[0].data.result.records,
+						availability: res[1].data.items[0].carpark_data,
+					});
+					setIsLoading(false);
+				})
+			);
+		}
 	}, [queryCpObj.queryLocation]);
 
-	console.log(api);
-	console.log(queryCpObj.availability);
-	console.log(queryCpObj.location);
-
-	// const qData = queryData.result.records;
-	// let cpQueryResult = cpLocation.map((element) => {
-	// 	return {
-	// 		address: element.address,
-	// 		nonSeasonLot: element.short_term_parking,
-	// 		freeParking: element.free_parking,
-	// 		car_park_no: element.car_park_no,
-	// 	};
-	// });
-
-	// console.log("before", queryCpObj.location);
-	// useEffect(() => {
-	// 	const result = [];
-	// 	for (const item of queryCpObj.location) {
-	// 		for (const element of queryCpObj.availability) {
-	// 			if (item.car_park_no === element.carpark_number) {
-	// 				result.push({
-	// 					address: item.address,
-	// 					availableLots: element.carpark_info[0].lots_available,
-	// 					totalLots: element.carpark_info[0].total_lots,
-	// 					nonSeasonLot: item.short_term_parking,
-	// 					freeParking: item.free_parking,
-	// 					cpId: item.car_park_no,
-	// 				});
-	// 			}
-	// 		}
-	// 	}
-	// 	setCpResult(result);
-	// }, [bool]);
-
-	// console.log("after", cpResult);
+	useEffect(() => {
+		if (queryCpObj.location && queryCpObj.availability) {
+			const result = [];
+			for (const item of queryCpObj.location) {
+				for (const element of queryCpObj.availability) {
+					if (item.car_park_no === element.carpark_number) {
+						result.push({
+							address: item.address,
+							availableLots: element.carpark_info[0].lots_available,
+							totalLots: element.carpark_info[0].total_lots,
+							nonSeasonLot: item.short_term_parking,
+							freeParking: item.free_parking,
+							cpId: item.car_park_no,
+						});
+					}
+				}
+			}
+			setCpResult(result);
+		}
+	}, [isLoading]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		setQueryCpObj({ ...queryCpObj, queryLocation: e.target.query.value });
+		setQueryCpObj({
+			location: "",
+			availability: "",
+			queryLocation: e.target.query.value,
+		});
 	};
 
 	return (
 		<div className="App">
 			<header>
-				<nav>
-					<ul>
-						<li>Home</li>
-						<li>About</li>
-						<li>Contact</li>
-					</ul>
-				</nav>
+				<NavBar />
 			</header>
 
-			<main>
-				<form onSubmit={handleSubmit}>
-					<input type="text" name="query" />
-					<input type="submit" />
-				</form>
-				<section></section>
-				<article>
-					<div>Traffic Cam</div>
-					<div>ERP rates</div>
-				</article>
-			</main>
+			<SearchBar
+				result={cpResult}
+				handleSubmit={handleSubmit}
+				isLoading={isLoading}
+				query={queryCpObj.queryLocation}
+			/>
+
+			<article>
+				<div>Traffic Cam</div>
+				<div>ERP rates</div>
+			</article>
+
 			<footer></footer>
 		</div>
 	);
