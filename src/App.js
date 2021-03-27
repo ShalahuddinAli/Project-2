@@ -1,10 +1,13 @@
 import axios from "axios";
-import { Route, Link, Switch } from "react-router-dom";
-
+import { useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import NavBar from "./components/NavBar/Nav";
-import SearchBar from "./components/SearchBar/SearchBar";
+import NavBar from "./components/Nav";
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
+import SearchResult from "./pages/SearchResult";
 
 function App() {
 	const [queryCpObj, setQueryCpObj] = useState({
@@ -14,6 +17,9 @@ function App() {
 	});
 	const [cpResult, setCpResult] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
+
+	// function SearchButton() {
+	const history = useHistory();
 
 	// const api = process.env.REACT_APP_API_KEY; //(process.env)// in vercel need to specify as .env file is ignored
 
@@ -38,6 +44,9 @@ function App() {
 					setIsLoading(false);
 				})
 			);
+			// .catch((error) => {
+			// 	console.log(error.response.data.error);
+			// });
 		}
 	}, [queryCpObj.queryLocation]);
 
@@ -53,7 +62,8 @@ function App() {
 							totalLots: element.carpark_info[0].total_lots,
 							nonSeasonLot: item.short_term_parking,
 							freeParking: item.free_parking,
-							cpId: item.car_park_no,
+							xCoord: item.x_coord,
+							yCoord: item.y_coord,
 						});
 					}
 				}
@@ -69,25 +79,33 @@ function App() {
 			availability: "",
 			queryLocation: e.target.query.value,
 		});
+		setCpResult([]);
+		history.push("/searchResult");
 	};
-
 	return (
 		<div className="App">
 			<header>
 				<NavBar />
 			</header>
-
-			<SearchBar
-				result={cpResult}
-				handleSubmit={handleSubmit}
-				isLoading={isLoading}
-				query={queryCpObj.queryLocation}
-			/>
-
-			<article>
-				<div>Traffic Cam</div>
-				<div>ERP rates</div>
-			</article>
+			<Switch>
+				<Route path="/" exact>
+					<Home handleSubmit={handleSubmit} />
+				</Route>
+				<Route path="/about">
+					<About />
+				</Route>
+				<Route path="/contact">
+					<Contact />
+				</Route>
+				<Route path="/searchResult">
+					<SearchResult
+						isLoading={isLoading}
+						query={queryCpObj.queryLocation}
+						result={cpResult}
+						handleSubmit={handleSubmit}
+					/>
+				</Route>
+			</Switch>
 
 			<footer></footer>
 		</div>
