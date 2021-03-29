@@ -8,6 +8,8 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import SearchResult from "./pages/SearchResult";
+import TrafficCam from "./pages/TrafficCam";
+import Erp from "./pages/Erp";
 
 function App() {
 	const [queryCpObj, setQueryCpObj] = useState({
@@ -22,7 +24,7 @@ function App() {
 	const history = useHistory();
 
 	// const api = process.env.REACT_APP_API_KEY; //(process.env)// in vercel need to specify as .env file is ignored
-
+	// console.log(api);
 	useEffect(() => {
 		if (queryCpObj.queryLocation) {
 			console.log("wwwww");
@@ -104,6 +106,12 @@ function App() {
 						result={cpResult}
 						handleSubmit={handleSubmit}
 					/>
+				</Route>
+				<Route path="/traffic_cam">
+					<TrafficCam />
+				</Route>
+				<Route path="/erp">
+					<Erp />
 				</Route>
 			</Switch>
 

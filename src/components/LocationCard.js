@@ -5,8 +5,8 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-// import MapTwoToneIcon from "@material-ui/icons/MapTwoTone";
-import Link from "@material-ui/core/Link";
+import MapTwoToneIcon from "@material-ui/icons/MapTwoTone";
+import IconButton from "@material-ui/core/IconButton";
 
 function LocationCard({ element }) {
 	const [mapRedirectObj, setMapRedirectObj] = useState({
@@ -31,7 +31,9 @@ function LocationCard({ element }) {
 			margin: 20,
 			height: 250,
 		},
-		btn: {},
+		// btn: {
+		// 	display: flex,
+		// },
 	});
 
 	const classes = useStyles();
@@ -55,11 +57,14 @@ function LocationCard({ element }) {
 				</Typography>
 			</CardContent>
 
-			<Link
+			<IconButton
 				href={`https://www.google.com/maps/search/?api=1&query=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`}
+				target="_blank"
+				edge="end"
+				className={classes.btn}
 			>
-				Map
-			</Link>
+				<MapTwoToneIcon />
+			</IconButton>
 		</Card>
 	);
 }

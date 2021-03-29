@@ -1,6 +1,6 @@
 export default [
 	{
-		title: "Traffic Cam",
+		title: "Traffic cam",
 		description: "Real-time footage of traffic conditions around Singapore",
 		img: require("./img/Traffic watch.png"),
 	},

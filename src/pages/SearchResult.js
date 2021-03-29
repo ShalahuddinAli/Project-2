@@ -29,8 +29,8 @@ const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 			)}
 			<Grid container>
 				{result.map((element, index) => (
-					<Grid item key={index} xs={12} md={4} lrg={2}>
-						<LocationCard element={element} />
+					<Grid item xs={12} md={4} lrg={2}>
+						<LocationCard element={element} key={index} />
 					</Grid>
 				))}
 			</Grid>
