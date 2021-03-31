@@ -1,6 +1,5 @@
 import axios from "axios";
-import { useHistory } from "react-router-dom";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import "./App.css";
 import NavBar from "./components/Nav";
@@ -11,7 +10,8 @@ import SearchResult from "./pages/SearchResult";
 import TrafficCam from "./pages/TrafficCam";
 import Erp from "./pages/Erp";
 
-function App() {
+const App = () => {
+	// const query = new URLSearchParams(this.props.location.search);
 	const [queryCpObj, setQueryCpObj] = useState({
 		location: "",
 		availability: "",
@@ -27,6 +27,7 @@ function App() {
 	// console.log(api);
 	useEffect(() => {
 		if (queryCpObj.queryLocation) {
+			history.push(`/search_result/${queryCpObj.queryLocation}`);
 			console.log("wwwww");
 			setIsLoading(true);
 			const requestLocation = axios.get(
@@ -81,13 +82,17 @@ function App() {
 			availability: "",
 			queryLocation: e.target.query.value,
 		});
-		setCpResult([]);
-		history.push("/searchResult");
+		if (queryCpObj.queryLocation !== e.target.query.value) {
+			setCpResult([]);
+		}
 	};
 	return (
 		<div className="App">
 			<header>
-				<NavBar />
+				<h1>¿Where To Park?</h1>
+				<div className="navbar_container">
+					<NavBar />
+				</div>
 			</header>
 			<Switch>
 				<Route path="/" exact>
@@ -99,7 +104,10 @@ function App() {
 				<Route path="/contact">
 					<Contact />
 				</Route>
-				<Route path="/searchResult">
+				<Route
+					path="/search_result/:query"
+					component={queryCpObj.queryLocation}
+				>
 					<SearchResult
 						isLoading={isLoading}
 						query={queryCpObj.queryLocation}
@@ -118,6 +126,6 @@ function App() {
 			<footer></footer>
 		</div>
 	);
-}
+};
 
 export default App;

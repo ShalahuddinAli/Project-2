@@ -7,16 +7,10 @@ import { useHistory } from "react-router-dom";
 
 const Home = ({ handleSubmit }) => {
 	const history = useHistory();
-	const handleClick = (e) => {
-		if (e.target.className !== "search_home") {
-			return;
-		} else {
-			history.push("/searchResult");
-		}
-	};
+
 	return (
 		<div className="home">
-			<div className="search_home" onClick={handleClick}>
+			<div className="search_home">
 				<SearchBar handleSubmit={handleSubmit} />
 			</div>
 

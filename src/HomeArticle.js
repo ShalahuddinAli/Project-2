@@ -6,7 +6,7 @@ export default [
 	},
 	{
 		title: "ERP",
-		description: "Real-time footage of traffic conditions around Singapore",
+		description: "ERP operation time and Charges",
 		img: require("./img/erp.jpeg"),
 	},
 ];

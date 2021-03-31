@@ -5,7 +5,7 @@ const SearchBar = ({ handleSubmit }) => {
 	return (
 		<form onSubmit={handleSubmit} className="search_bar">
 			<SearchIcon className="search_inputIcon" />
-			<input type="text" name="query" />
+			<input type="text" name="query" required />
 			<div className="search_button">
 				<Button type="submit" variant="outlined">
 					Where To Park?

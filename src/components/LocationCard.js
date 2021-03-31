@@ -7,6 +7,17 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import MapTwoToneIcon from "@material-ui/icons/MapTwoTone";
 import IconButton from "@material-ui/core/IconButton";
+import Box from "@material-ui/core/Box";
+
+const useStyles = makeStyles({
+	root: {
+		margin: 20,
+		height: 300,
+	},
+	lots: {
+		display: "inline",
+	},
+});
 
 function LocationCard({ element }) {
 	const [mapRedirectObj, setMapRedirectObj] = useState({
@@ -25,46 +36,42 @@ function LocationCard({ element }) {
 		});
 	}, []);
 
-	console.log(mapRedirectObj.xCoord, mapRedirectObj.yCoord);
-	const useStyles = makeStyles({
-		root: {
-			margin: 20,
-			height: 250,
-		},
-		// btn: {
-		// 	display: flex,
-		// },
-	});
-
 	const classes = useStyles();
 	return (
 		<Card className={classes.root}>
-			<CardContent>
+			<Box display="flex" justifyContent="flex-end" flexDirection="row">
+				<IconButton
+					href={`https://www.google.com/maps?saddr=My+Location&daddr=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`}
+					target="_blank"
+					edge="start"
+					className={classes.btnIcon}
+				>
+					<MapTwoToneIcon />
+				</IconButton>
+			</Box>
+			<CardContent className={classes.cardContent}>
 				<Typography gutterBottom variant="h6">
 					{element.address}
 				</Typography>
-				<Typography variant="body1" color="textSecondary" component="p">
-					Available lots: {element.availableLots}
+				<Typography variant="body1" color="textSecondary">
+					Available lots:
+					<Typography
+						className={classes.lots}
+						color={element.availableLots < 5 ? "error" : "textSecondary"}
+					>
+						{element.availableLots}
+					</Typography>
 				</Typography>
-				<Typography variant="body1" color="textSecondary" component="p">
+				<Typography variant="body1" color="textSecondary">
 					Total lots: {element.totalLots}
 				</Typography>
-				<Typography variant="body1" color="textSecondary" component="p">
+				<Typography variant="body1" color="textSecondary">
 					Free parking: {element.freeParking}
 				</Typography>
-				<Typography variant="body1" color="textSecondary" component="p">
-					Non season parking: {element.nonSeasonLot}
+				<Typography variant="body1" color="textSecondary">
+					Non-season parking: {element.nonSeasonLot}
 				</Typography>
 			</CardContent>
-
-			<IconButton
-				href={`https://www.google.com/maps/search/?api=1&query=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`}
-				target="_blank"
-				edge="end"
-				className={classes.btn}
-			>
-				<MapTwoToneIcon />
-			</IconButton>
 		</Card>
 	);
 }
