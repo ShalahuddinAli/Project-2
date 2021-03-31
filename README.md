@@ -17,6 +17,7 @@
 
 - "Carpark availability" from data.gov
 - "HDB carpark information" from data.gov
+- "Traffic Camera" from data.gov
 
 # Tech Stacks
 
@@ -24,5 +25,6 @@
 - CSS
 - Javascript
 - React JS
+- Material UI
 
 # Project-2
