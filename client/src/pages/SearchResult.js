@@ -1,4 +1,5 @@
 import SearchBar from "../components/SearchBar";
+import { useLocation } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import LocationCard from "../components/LocationCard";
@@ -15,6 +16,8 @@ const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 		},
 	});
 	const classes = useStyles();
+     const location=useLocation();
+     console.log(location,'sdasdasdas');
 
 	console.log(result);
 	return (
