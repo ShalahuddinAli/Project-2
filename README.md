@@ -1,4 +1,4 @@
-# Project-2- Carpark availability finder
+# Carpark availability finder
 
 # Background Information
 
@@ -22,9 +22,8 @@
 # Tech Stacks
 
 - HTML
-- CSS
+- Material UI
 - Javascript
 - React JS
 - Material UI
 
-# Project-2
