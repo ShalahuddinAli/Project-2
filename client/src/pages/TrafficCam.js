@@ -15,14 +15,6 @@ const TrafficCam = () => {
   const [trafficImg, setTrafficImg] = useState([]);
   const [resultImg, setResultImg] = useState([]);
   const history = useHistory();
-  const location = useLocation();
-
-  //   const queryParam = qs.parse(location.search);
-  //   const newQueryParam = {
-  //     ...queryParam,
-  //     user_role: "admin",
-  //     something_else: "something",
-  //   };
 
   useEffect(() => {
     const camImageUrl = "http://localhost:4444/proxyServer/traffic_cam";
@@ -66,8 +58,7 @@ const TrafficCam = () => {
       }
       setResultImg(resultAtLast);
     }
-    console.log(check);
-    console.log(area);
+    // query string for traffic cam checkbox
     history.replace({
       pathname: "/traffic_cam",
       search: qs.stringify({ area: result }),
