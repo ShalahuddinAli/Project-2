@@ -1,16 +1,12 @@
-const express = require('express');
+require("dotenv").config();
+const express = require("express");
 const app = express();
-const cors = require('cors');
-const carparkController= require('./controllers/carpark')
-const trafficCamController= require('./controllers/trafficCam')
-require('dotenv').config();
+const cors = require("cors");
+const router = require("./routes");
 
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4000;
 app.use(cors());
 
-app.use('/proxyServer/carparks', carparkController);
-app.use('/proxyServer/trafficCam', trafficCamController);
+app.use("/proxyServer", router);
 
-
-
-app.listen(PORT,()=> console.log(`Listening...`))
+app.listen(PORT, () => console.log(`Listening...`));
