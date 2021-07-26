@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
 import { useEffect, useState } from "react";
+import { useHistory, useLocation } from "react-router-dom";
+import qs from "query-string";
 import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
@@ -12,9 +14,16 @@ import CheckBoxes from "../components/CheckBoxes";
 const TrafficCam = () => {
   const [trafficImg, setTrafficImg] = useState([]);
   const [resultImg, setResultImg] = useState([]);
+  const history = useHistory();
+  const location = useLocation();
 
-  // console.log("api", trafficImg);
-  // console.log("data", CamLocation);
+  //   const queryParam = qs.parse(location.search);
+  //   const newQueryParam = {
+  //     ...queryParam,
+  //     user_role: "admin",
+  //     something_else: "something",
+  //   };
+
   useEffect(() => {
     const camImageUrl = "http://localhost:4444/proxyServer/traffic_cam";
 
@@ -40,6 +49,8 @@ const TrafficCam = () => {
 
   const handleChange = (event) => {
     setCheck({ ...check, [event.target.name]: event.target.checked });
+    console.log(event.target);
+    console.log(result);
   };
 
   useEffect(() => {
@@ -55,24 +66,13 @@ const TrafficCam = () => {
       }
       setResultImg(resultAtLast);
     }
+    console.log(check);
+    console.log(area);
+    history.replace({
+      pathname: "/traffic_cam",
+      search: qs.stringify({ area: result }),
+    });
   }, [check]);
-
-  // const selector = {}
-  // if (resultImg) {
-  // 	trafficImg.map((element) =>
-  // 		resultImg.map((item) => {
-  // 			if (element.camera_id === item.camera_id)
-  // 				return {
-  // 					camera_id: element.camera_id,
-  // 					image: element.image,
-  // 					location: element.location,
-  // 					camera_id: element.camera_id,
-  // 					location2: item.location,
-  // 					area: item.area,
-  // 				};
-  // 		})
-  // 	);
-  // }
 
   return (
     <div>
@@ -84,19 +84,6 @@ const TrafficCam = () => {
 
         <Grid container>
           {trafficImg &&
-            // selector.map((element) => {
-            // 	return (
-            // 		<Grid item key={element.camera_id}>
-            // 			<TrafficCard
-            // 				img={element.image}
-            // 				location={element.location}
-            // 				id={element.camera_id}
-            // 				road={element.location2}
-            // 				cluster={element.area}
-            // 			/>
-            // 		</Grid>
-            // 	);
-            // })
             trafficImg.map((element) =>
               resultImg.map((item) => {
                 if (element.camera_id === item.camera_id)
