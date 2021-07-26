@@ -39,7 +39,7 @@ carparks.get("/:location", async(req, res) => {
                               }
                          }
                     
-                         res.json(location);
+                         res.json(result);
                }
           
           } catch (error) {
