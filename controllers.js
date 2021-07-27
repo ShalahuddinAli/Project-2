@@ -1,5 +1,4 @@
 const express = require("express");
-const carparks = express.Router();
 const axios = require("axios");
 require("dotenv").config();
 
@@ -45,7 +44,7 @@ const controller = {
         res.json(result);
       }
     } catch (error) {
-      res.json({ message: error });
+      res.json({ message: "error" });
     }
   },
 
@@ -57,7 +56,23 @@ const controller = {
 
       res.json(data.items[0].cameras);
     } catch (error) {
-      res.json({ message: error });
+      res.json({ message: "error" });
+    }
+  },
+
+  getTrafficNews: async (req, res) => {
+    const BASE_URL =
+      "http://datamall2.mytransport.sg/ltaodataservice/TrafficIncidents";
+
+    const AccountKey = process.env.API_KEY_DATAMALL;
+
+    try {
+      const {data} = await axios.get(BASE_URL, {
+        headers: { AccountKey: AccountKey },
+      });
+      res.json(data.value);
+    } catch (error) {
+      res.json({ message: "error" });
     }
   },
 };

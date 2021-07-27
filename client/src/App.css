@@ -1,117 +1,118 @@
 * {
-	margin: 0;
-	padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 header {
-	margin-bottom: 70px;
-	padding-bottom: 30px;
-	padding-top: 15px;
-	background-color: #f5efda;
+  margin-bottom: 70px;
+  padding-bottom: 30px;
+  padding-top: 15px;
+  background-color: #3f56a9;
 }
 header div {
-	position: relative;
+  position: relative;
 }
 
 .navbar_container {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 nav {
-	position: absolute;
-	display: inline-block;
-	/* top: 30px;
+  position: absolute;
+  display: inline-block;
+  /* top: 30px;
 	left: 63px; */
-	border-radius: 10px;
-	border: 2px solid black;
-	margin: 13px;
-	z-index: 1;
-	background-color: whitesmoke;
-	/* padding: 0 30px; */
+  border-radius: 10px;
+  border: 2px solid black;
+  margin: 13px;
+  z-index: 1;
+  background-color: whitesmoke;
+  /* padding: 0 30px; */
 }
 
 ul li {
-	display: inline-flex;
-	padding: 10px;
-	margin: 0 20px;
-	color: black;
+  display: inline-flex;
+  padding: 10px;
+  margin: 0 20px;
+  color: black;
 }
 
 #about {
-	border-left: 2px solid black;
-	border-right: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
 }
 
 ul li:hover {
-	transform: scale(1.5);
-	text-decoration: underline;
-	transition: 1s;
+  transform: scale(1.5);
+  text-decoration: underline;
+  transition: 1s;
 }
 
 form {
-	align-items: center;
-	margin: auto;
-	width: 50%;
-	border: 3px solid green;
-	padding: 100px;
+  align-items: center;
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 100px;
 }
 
 .search_home {
-	border: 2px solid black;
-	padding: 150px 150px 50px 150px;
-	margin: 40px;
-	background-image: url(./img/pexels-photo-385997.jpeg);
-	background-position: center;
+  border: 2px solid black;
+  padding: 150px 150px 50px 150px;
+  margin: 40px;
+  margin-bottom: 0;;
+  background-image: url(./img/pexels-photo-385997.jpeg);
+  background-position: center;
 }
 
 .search_bar {
-	display: flex;
-	align-items: center;
-	border: 2px solid lightgray;
-	height: 25px;
-	padding: 10px 20px;
-	border-radius: 999px;
-	width: 110vw;
-	margin: 0 auto;
-	margin-top: 70px;
-	max-width: 700px;
+  display: flex;
+  align-items: center;
+  border: 2px solid lightgray;
+  height: 25px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  width: 110vw;
+  margin: 0 auto;
+  margin-top: 70px;
+  max-width: 700px;
 }
 
 .search_bar input {
-	flex: 1;
-	padding: 10px 20px;
-	font-size: medium;
-	border: none;
+  flex: 1;
+  padding: 10px 20px;
+  font-size: medium;
+  border: none;
 }
 
 .search_bar input:focus {
-	outline: none;
+  outline: none;
 }
 
 .search_inputIcon {
-	color: black;
+  color: black;
 }
 
 .search_button {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .search_button button {
-	margin: 5px;
-	padding: 7px 15px;
-	border: 1px solid #c6c6c6;
-	border-radius: 999px;
-	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-	text-transform: inherit;
-	background-image: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
-	background-color: #f8f8f8;
-	color: #222;
+  margin: 5px;
+  padding: 7px 15px;
+  border: 1px solid #c6c6c6;
+  border-radius: 999px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  text-transform: inherit;
+  background-image: -webkit-linear-gradient(top, #f8f8f8, #f1f1f1);
+  background-color: #f8f8f8;
+  color: #222;
 }
 
 .search_button button:hover {
-	box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
-		0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* .home_card:hover {
@@ -123,10 +124,31 @@ form {
 	box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 } */
 
-h1 {
-	/* font-family: ; */
-	display: flex;
-	justify-content: center;
-	font-family: "Sacramento", cursive;
-	margin-top: 0px;
+.main_header {
+  /* font-family: ; */
+  display: flex;
+  justify-content: center;
+  font-family: "Sacramento", cursive;
+  margin-top: 0px;
+  color: #f5f5f5;
+  font-weight:lighter;
 }
+
+.traffic_incidents {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  padding: 70px;
+}
+
+.newsticker {
+  background-color: #3f56a9;
+  padding: 0;
+  margin: 0;
+}
+
+/* .news {
+  background-color: #f1f1f1;
+  padding: 0;
+  margin: 0;
+} */
