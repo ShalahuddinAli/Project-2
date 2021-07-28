@@ -1,11 +1,12 @@
 import axios from "axios";
 import { Route, Switch, useHistory } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,Fragment } from "react";
 import "./App.css";
-import NavBar from "./components/Nav";
+import Header from "./components/Header";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import AdminLogin from "./pages/AdminLogin";
 import SearchResult from "./pages/SearchResult";
 import TrafficCam from "./pages/TrafficCam";
 import Footer from "./components/Footer";
@@ -49,14 +50,12 @@ const App = () => {
   };
   return (
     <div className="App">
-      <header>
-        <h1 className="main_header">¿Where To Park?</h1>
-
-        <div className="navbar_container">
-          <NavBar />
-        </div>
-      </header>
       <Switch>
+        <Route path="/admin">
+          <AdminLogin />
+        </Route>
+           <Fragment>
+      <Header/>
         <Route path="/" exact>
           <Home handleSubmit={handleSubmit} query={queryLocation} />
         </Route>
@@ -81,9 +80,10 @@ const App = () => {
         <Route path="/erp">
           <Erp />
         </Route>
+      <Footer />
+        </Fragment>
       </Switch>
 
-      <Footer />
     </div>
   );
 };

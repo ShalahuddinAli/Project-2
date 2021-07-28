@@ -3,6 +3,7 @@ import { Grid, Paper, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import TrendingUpIcon from "@material-ui/icons/TrendingUp";
 import TrendingDownIcon from "@material-ui/icons/TrendingDown";
+import CssBaseline from '@material-ui/core/CssBaseline';
 import coeInfo from "../coeInfo";
 
 const useStyles = makeStyles((theme) => ({
@@ -11,14 +12,14 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "center",
   },
   paper: {
-    width: 300,
-    height: 200,
+    width: 250,
+    height: 150,
     justifyContent: "center",
   },
   itemContent: {
     justifyContent: "center",
     backgroundColor: "#a9923f",
-    height: "30%",
+    height: "35%",
     alignItems: "center",
   },
   cat: {
@@ -38,9 +39,11 @@ const useStyles = makeStyles((theme) => ({
     alignItems: "center",
   },
   iconContainer: {
-    margin: "5px 30px 0 0",
+    margin: "0 30px 0 0",
+    height:"100%"
   },
   icon: {
+       display: "block",
     fontSize: 60,
   },
 }));
@@ -52,6 +55,10 @@ const CoeInfo = () => {
   useEffect(() => {
     setCoe(coeInfo);
   }, []);
+
+  const numberWithCommas=(x)=> {
+    return Math.abs(x).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
   return (
     <Grid
       container
@@ -78,14 +85,16 @@ const CoeInfo = () => {
             <Grid container className={classes.prem}>
               <Grid item className={classes.iconContainer}>
                 {item.premium.current > item.premium.previous ? (
-                  <TrendingUpIcon color="secondary" className={classes.icon} />
+                  <TrendingUpIcon style={{ color: "red" }} className={classes.icon} />
                 ) : (
                   <TrendingDownIcon style={{ color: "green" }} />
                 )}
+                <Typography variant="caption" style={{ color: item.premium.current - item.premium.previous >0 ? "red" : "green"}}className={classes.premDiff}>${numberWithCommas(item.premium.current - item.premium.previous)}</Typography>
               </Grid>
+              <CssBaseline/>
               <Grid item>
                 <Typography className={classes.premText} variant="h5">
-                  ${item.premium.current}
+                  ${numberWithCommas(item.premium.current)}
                 </Typography>
                 <Typography variant="subtitle2">(Quota Premium)</Typography>
               </Grid>
