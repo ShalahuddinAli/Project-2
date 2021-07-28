@@ -20,19 +20,26 @@ const GetNews = () => {
   }, [news]);
 
   return news ? (
-    news.map((item, index) => <NewsTicker key={index} id={index} title={item.Message} className= "news"/>)
+    news.map((item, index) => (
+      <NewsTicker
+        key={index}
+        id={index}
+        title={item.Message}
+        className="news"
+      />
+    ))
   ) : (
-    <NewsTicker title = "No Traffic Incident... Drive Safe!!!" className= "news"/>
+    <NewsTicker title="No Traffic Incident... Drive Safe!!!" className="news" />
   );
 };
 
 const IncidentsTicker = () => {
   return (
     <div className="newsticker">
-          <Ticker isNewsTicker={true} show={true}>
-            <GetNews/>
-          </Ticker>
-        </div>
+      <Ticker isNewsTicker={true} show={true}>
+        <GetNews />
+      </Ticker>
+    </div>
   );
 };
 

@@ -50,6 +50,7 @@ const controller = {
 
   getTrafficCam: async (req, res) => {
     const BASE_URL = "https://api.data.gov.sg/v1/transport/traffic-images";
+    
 
     try {
       const { data } = await axios.get(BASE_URL);

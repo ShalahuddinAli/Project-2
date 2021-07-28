@@ -4,10 +4,12 @@ import HomeCard from "../components/HomeCard";
 import HomeCardArr from "../HomeArticle";
 import Container from "@material-ui/core/Container";
 import IncidentsTicker from "../components/IncidentsTicker";
+import CoeInfo from "../components/CoeInfo";
 
 const Home = ({ handleSubmit, handleChange, query }) => {
   return (
     <div className="home">
+      <CoeInfo />
       <div className="search_home">
         <SearchBar
           handleSubmit={handleSubmit}
@@ -28,8 +30,6 @@ const Home = ({ handleSubmit, handleChange, query }) => {
           </Grid>
         </Container>
       </article>
-      <div className="traffic_incidents">
-      </div>
     </div>
   );
 };
