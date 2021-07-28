@@ -21,9 +21,8 @@
 
 # Tech Stacks
 
-- HTML
-- Material UI
-- Javascript
 - React JS
 - Material UI
 - Express
+- MongoDB
+- Mongoose
