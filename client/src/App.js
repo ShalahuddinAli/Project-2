@@ -8,6 +8,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import SearchResult from "./pages/SearchResult";
 import TrafficCam from "./pages/TrafficCam";
+import Footer from "./components/Footer";
 import Erp from "./pages/Erp";
 
 const App = () => {
@@ -82,7 +83,7 @@ const App = () => {
         </Route>
       </Switch>
 
-      <footer></footer>
+      <Footer />
     </div>
   );
 };
