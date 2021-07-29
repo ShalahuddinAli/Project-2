@@ -13,11 +13,7 @@ if (process.env.NODE_ENV === 'production') {
 		res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
 	});
 }
-app.use(
-	cors({
-		origin: 'hhttps://carpark-finder-app.herokuapp.com',
-	})
-);
+app.use(cors());
 app.use(express.json());
 
 app.use('/proxyServer', proxyRouter);
