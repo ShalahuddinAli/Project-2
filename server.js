@@ -15,7 +15,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 app.use(
 	cors({
-		origin: 'http://localhost:3000',
+		origin: 'hhttps://carpark-finder-app.herokuapp.com',
 	})
 );
 app.use(express.json());
