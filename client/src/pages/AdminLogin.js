@@ -10,6 +10,8 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 
 function Copyright() {
@@ -54,26 +56,49 @@ const useStyles = makeStyles((theme) => ({
 	submit: {
 		margin: theme.spacing(3, 0, 2),
 	},
+	buttonProgress: {
+		position: 'relative',
+		bottom: '46px',
+		left: '155px',
+	},
 }));
 
 const AdminLogin = () => {
 	const classes = useStyles();
 	const [admin, setAdmin] = useState({ username: '', password: '' });
+	const [loading, setLoading] = useState(false);
+	const [success, setSuccess] = useState({ status: true, message: '' });
+
 	const history = useHistory();
 
 	const { username, password } = admin;
+	const { status, message } = success;
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		setLoading(true);
+		setSuccess({ status: true, message: '' });
 		axios
 			.post(`http://localhost:4444/admin/login/`, {
 				username: e.target.username.value,
 				password: e.target.password.value,
 			})
 			.then((res) => {
-				console.log(res.data);
+				if (res.data.accessToken) {
+					localStorage.setItem('token', res.data.accessToken);
+					history.push('/');
+				} else {
+					setSuccess({ status: false, message: res.data });
+					console.log(res.data);
+				}
 			})
 			.catch((error) => {
 				console.error(error);
+				setSuccess({ status: false, message: error.data });
+			})
+			.finally(() => {
+				setAdmin({ username: '', password: '' });
+				setLoading(false);
 			});
 	};
 
@@ -89,10 +114,8 @@ const AdminLogin = () => {
 					<Typography component="h1" variant="h5">
 						Admin Access
 					</Typography>
-					<form
-						className={classes.form}
-						noValidate
-						onSubmit={(e) => handleSubmit(e)}>
+					<form className={classes.form} onSubmit={(e) => handleSubmit(e)}>
+						{!status && <Alert severity="error">{message}</Alert>}
 						<TextField
 							variant="outlined"
 							margin="normal"
@@ -127,9 +150,17 @@ const AdminLogin = () => {
 							fullWidth
 							variant="contained"
 							color="primary"
+							disabled={loading}
 							className={classes.submit}>
 							Sign In
 						</Button>
+						{loading && (
+							<CircularProgress
+								size={24}
+								className={classes.buttonProgress}
+								color="primary"
+							/>
+						)}
 						<Box mt={5}>
 							<Copyright />
 						</Box>

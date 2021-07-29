@@ -1,4 +1,3 @@
-const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 require('dotenv').config();
@@ -15,19 +14,31 @@ const controller = {
 				const match = await bcrypt.compare(password, authPassword);
 
 				if (match) {
-					const user = { name: username };
+					const payload = { name: username };
 
-					const accessToken = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET);
+					const accessToken = jwt.sign(
+						payload,
+						process.env.ACCESS_TOKEN_SECRET,
+						{ expiresIn: 30 * 60 }
+					);
 					res.json({ accessToken });
 				} else {
-					res.json({ message: 'Invalid Credentials' });
+					res.send('Invalid Credentials! Try Again');
 				}
 			} else {
-				res.json({ message: 'Invalid Credentials' });
+				res.send('Invalid Credentials! Try Again');
 			}
 		} catch (error) {
-			res.sendStatus(500);
+			res.status(500).send('Server Error! Try Again');
 		}
+	},
+
+	addCoe: async (req, res) => {
+		console.log('add');
+		res.json({ mesagge: 'hurray' });
+	},
+	editCoe: async (req, res) => {
+		console.log('edit');
 	},
 };
 
