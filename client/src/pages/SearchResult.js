@@ -1,11 +1,11 @@
-import SearchBar from "../components/SearchBar";
-import { useLocation } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
-import LocationCard from "../components/LocationCard";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import Loading from "../components/Loading";
+import SearchBar from '../components/SearchBar';
+import { useLocation } from 'react-router-dom';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import LocationCard from '../components/LocationCard';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Loading from '../components/Loading';
 
 const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 	const useStyles = makeStyles({
@@ -16,8 +16,7 @@ const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 		},
 	});
 	const classes = useStyles();
-     const location=useLocation();
-     console.log(location,'sdasdasdas');
+	const location = useLocation();
 
 	console.log(result);
 	return (
@@ -36,11 +35,12 @@ const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 				</Typography>
 			)}
 			<Grid container>
-				{result && result.map((element, index) => (
-					<Grid item xs={12} md={4} lrg={2} key={index}>
-						<LocationCard element={element} />
-					</Grid>
-				))}
+				{result &&
+					result.map((element, index) => (
+						<Grid item xs={12} md={4} lrg={2} key={index}>
+							<LocationCard element={element} />
+						</Grid>
+					))}
 			</Grid>
 		</Container>
 	);
