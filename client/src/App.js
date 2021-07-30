@@ -35,7 +35,7 @@ const App = () => {
 					setQueryCpObj({ ...queryCpObj, result: res.data, isLoading: false });
 				})
 				.catch((error) => {
-					console.log(error.response.data.error);
+					console.log(error.data);
 				});
 		}
 	}, [queryLocation]);
