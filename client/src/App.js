@@ -31,11 +31,11 @@ const App = () => {
 			axios
 				.get(`http://localhost:4444/proxyServer/carpark/${queryLocation}`)
 				.then((res) => {
-					console.log(res.data);
+					console.log(res.data, 'search');
 					setQueryCpObj({ ...queryCpObj, result: res.data, isLoading: false });
 				})
 				.catch((error) => {
-					console.log(error.data);
+					console.log(error);
 				});
 		}
 	}, [queryLocation]);

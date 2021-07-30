@@ -6,7 +6,7 @@ const controller = {
 	getCarpark: async (req, res) => {
 		let location;
 		let availability;
-		console.log(req.body);
+		console.log(req.body, 'hello');
 		const requestLocation = axios.get(
 			`https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q={"address":"${req.params.location}"}`
 		);

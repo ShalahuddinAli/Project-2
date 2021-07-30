@@ -17,7 +17,7 @@ const GetNews = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log(news);
+		console.log(news, 'hello');
 	}, [news]);
 
 	return news ? (

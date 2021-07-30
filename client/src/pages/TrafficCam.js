@@ -26,7 +26,7 @@ const TrafficCam = () => {
 				console.log(res.data, 'hellooo');
 			})
 			.catch((err) => {
-				console.log(err.data);
+				console.log(err);
 			});
 	}, []);
 
