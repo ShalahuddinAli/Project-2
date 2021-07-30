@@ -1,28 +1,77 @@
-import React from 'react'
-import { Link } from "react-router-dom";
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
+import Toolbar from '@material-ui/core/Toolbar';
+import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@material-ui/core';
+
+const useStyles = makeStyles((theme) => ({
+	toolbar: {
+		borderBottom: `1px solid ${theme.palette.divider}`,
+		background: 'linear-gradient(10deg, #ED715D 50%, #5dd9ed 90%)',
+	},
+	toolbarTitle: {
+		fontFamily: 'Cinzel',
+		flex: 1,
+	},
+	toolbarSecondary: {
+		justifyContent: 'center',
+	},
+	toolbarLink: {
+		padding: theme.spacing(2),
+	},
+}));
 
 const Header = () => {
-     return (
-          <header>
-        <h1 className="main_header">¿Where To Park?</h1>
+	const classes = useStyles();
+	return (
+		<Box height="14vh">
+			<Toolbar className={classes.toolbar}>
+				<Button size="small">Subscribe</Button>
+				<Typography
+					component="h2"
+					variant="h5"
+					color="inherit"
+					align="center"
+					noWrap
+					className={classes.toolbarTitle}>
+					Parking Hunter
+				</Typography>
+				<Button variant="outlined" size="small" href="/admin">
+					Admin Access
+				</Button>
+			</Toolbar>
+			<Toolbar
+				component="nav"
+				variant="dense"
+				className={classes.toolbarSecondary}>
+				<nav>
+					<Link
+						variant="button"
+						color="textPrimary"
+						href="/"
+						className={classes.toolbarLink}>
+						Home
+					</Link>
+					<Link
+						variant="button"
+						color="textPrimary"
+						href="/about"
+						className={classes.toolbarLink}>
+						About
+					</Link>
+					<Link
+						variant="button"
+						color="textPrimary"
+						href="/contact"
+						className={classes.toolbarLink}>
+						Contact
+					</Link>
+				</nav>
+			</Toolbar>
+		</Box>
+	);
+};
 
-        <div className="navbar_container">
-          <nav>
-			<ul>
-				<Link to="/" id="home">
-					<li>Home</li>
-				</Link>
-				<Link to="/about" id="about">
-					<li>About</li>
-				</Link>
-				<Link to="/contact" id="contact">
-					<li>Contact</li>
-				</Link>
-			</ul>
-		</nav>
-        </div>
-      </header>
-     )
-}
-
-export default Header
+export default Header;

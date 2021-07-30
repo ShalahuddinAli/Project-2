@@ -50,12 +50,12 @@ const App = () => {
 	};
 	return (
 		<div className="App">
+			<Header />
 			<Switch>
 				<Route path="/admin">
 					<AdminLogin />
 				</Route>
 				<Fragment>
-					<Header />
 					<Route path="/" exact>
 						<Home handleSubmit={handleSubmit} query={queryLocation} />
 					</Route>
@@ -80,9 +80,9 @@ const App = () => {
 					<Route path="/erp">
 						<Erp />
 					</Route>
-					<Footer />
 				</Fragment>
 			</Switch>
+			<Footer />
 		</div>
 	);
 };
