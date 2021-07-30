@@ -79,7 +79,7 @@ const AdminLogin = () => {
 		setLoading(true);
 		setSuccess({ status: true, message: '' });
 		axios
-			.post(`http://localhost:4444/admin/login/`, {
+			.post(`/admin/login/`, {
 				username: e.target.username.value,
 				password: e.target.password.value,
 			})

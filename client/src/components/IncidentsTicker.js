@@ -6,7 +6,7 @@ const GetNews = () => {
 	const [news, setNews] = useState('');
 	useEffect(() => {
 		axios
-			.get('http://localhost:4444/proxyServer/traffic_news')
+			.get('/proxyServer/traffic_news')
 			.then((res) => {
 				setNews(res.data);
 				console.log(res.data, 'incidents');

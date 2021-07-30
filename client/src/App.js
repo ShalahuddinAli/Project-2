@@ -29,7 +29,7 @@ const App = () => {
 				search: `?location=${queryLocation}`,
 			});
 			axios
-				.get(`http://localhost:4444/proxyServer/carpark/${queryLocation}`)
+				.get(`/proxyServer/carpark/${queryLocation}`)
 				.then((res) => {
 					console.log(res.data, 'search');
 					setQueryCpObj({ ...queryCpObj, result: res.data, isLoading: false });

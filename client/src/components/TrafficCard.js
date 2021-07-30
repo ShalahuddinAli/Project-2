@@ -1,9 +1,9 @@
-import React from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardMedia from "@material-ui/core/CardMedia";
-import { makeStyles } from "@material-ui/core/styles";
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import CardMedia from '@material-ui/core/CardMedia';
+import { makeStyles } from '@material-ui/core/styles';
 
 function TrafficCard({ img, road }) {
 	const useStyles = makeStyles({
@@ -15,10 +15,10 @@ function TrafficCard({ img, road }) {
 		media: {
 			height: 300,
 			width: 470,
-			display: "flex",
-			justifyContent: "center",
-			flexDirection: "row",
-			objectFit: "fill",
+			display: 'flex',
+			justifyContent: 'center',
+			flexDirection: 'row',
+			objectFit: 'fill',
 		},
 	});
 
