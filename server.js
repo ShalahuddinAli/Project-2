@@ -6,8 +6,6 @@ const adminRouter = require('./routes/admin');
 const path = require('path');
 const cors = require('cors');
 
-const PORT = process.env.PORT || 4000;
-
 app.use(cors());
 app.use(express.json());
 
@@ -25,5 +23,7 @@ if (process.env.NODE_ENV === 'production') {
 		res.json({ message: 'API Connected...' });
 	});
 }
+
+const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => console.log(`Listening...`));
