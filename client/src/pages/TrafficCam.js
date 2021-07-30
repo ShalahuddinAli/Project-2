@@ -17,7 +17,7 @@ const TrafficCam = () => {
 	const history = useHistory();
 
 	useEffect(() => {
-		const camImageUrl = 'http://localhost:4444/proxyServer/traffic_cam';
+		const camImageUrl = '/proxyServer/traffic_cam';
 
 		axios
 			.get(camImageUrl)
