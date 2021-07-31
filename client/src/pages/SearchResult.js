@@ -14,14 +14,21 @@ const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 			paddingBottom: 0,
 			marginTop: 100,
 		},
+		search: {
+			display: 'flex',
+			justifyContent: 'center',
+			marginTop: 30,
+		},
 	});
 	const classes = useStyles();
-	const location = useLocation();
+	// const location = useLocation();
 
 	console.log(result);
 	return (
 		<Container>
-			<SearchBar handleSubmit={handleSubmit} />
+			<div className={classes.search}>
+				<SearchBar handleSubmit={handleSubmit} />
+			</div>
 			{isLoading ? (
 				<Typography variant="h4" className={classes.isLoading}>
 					Searching for "{query}"
