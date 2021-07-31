@@ -1,3 +1,4 @@
+import { makeStyles } from '@material-ui/core/styles';
 import SearchBar from '../components/SearchBar';
 import Grid from '@material-ui/core/Grid';
 import HomeTrafficCam from '../components/HomeTraficCam';
@@ -6,7 +7,6 @@ import Box from '@material-ui/core/Box';
 import IncidentsTicker from '../components/IncidentsTicker';
 import CoeInfo from '../components/CoeInfo';
 import img from '../img/pexels-photo-385997.jpeg';
-import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
 	mainbody: {

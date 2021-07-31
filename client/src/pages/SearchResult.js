@@ -1,10 +1,10 @@
 import SearchBar from '../components/SearchBar';
-import { useLocation } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+// import { useLocation } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import LocationCard from '../components/LocationCard';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
 import Loading from '../components/Loading';
 
 const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
