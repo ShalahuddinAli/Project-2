@@ -1,17 +1,9 @@
 import React from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import axios from 'axios';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
+import { Link as RouterLink } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import Link from '@material-ui/core/Link';
+import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import { makeStyles } from '@material-ui/core/styles';
 import img from '../img/erp.jpeg';
 
@@ -21,33 +13,59 @@ const useStyles = makeStyles((theme) => ({
 		marginBottom: '10vh',
 	},
 	image: {
-		backgroundImage: `url(${img})`,
-		backgroundRepeat: 'no-repeat',
-		backgroundColor:
-			theme.palette.type === 'light'
-				? theme.palette.grey[50]
-				: theme.palette.grey[900],
-		backgroundSize: 'cover',
+		background: `radial-gradient(circle at center, transparent, mistyrose), url(${img})`,
+		borderRadius: '50%',
 		backgroundPosition: 'center',
 	},
-	paper: {
-		margin: theme.spacing(8, 4),
+	itemContainer: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	title: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	desc: {
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
+	},
+	link: {
+		display: 'flex',
+		alignItems: 'center',
+		'&:hover': {
+			transition: '100ms',
+			fontSize: 'large',
+		},
 	},
 }));
 const HomeErp = ({ element }) => {
 	const classes = useStyles();
 	return (
 		<Grid container component="main" className={classes.root}>
-			<Grid item xs={false} sm={4} md={7} className={classes.image} />
-			<Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
-				<div className={classes.paper}>
-					<Typography component="h1" variant="h5">
-						Electronic Road Pricing
+			<Grid item xs={6} className={classes.image} />
+			<Grid
+				item
+				container
+				xs={6}
+				direction="column"
+				className={classes.itemContainer}>
+				<Grid item className={classes.title} xs={6}>
+					<Typography component="h1" variant="h4">
+						Electronic Road Pricing(ERP)
 					</Typography>
-				</div>
+				</Grid>
+				<Grid item className={classes.desc} xs={6}>
+					<Typography component="h1" variant="h5">
+						Check the Electronic Road Pricing (ERP) rates for different roads at
+						specific times of the day.
+					</Typography>
+					<Link component={RouterLink} to="/erp" className={classes.link}>
+						Find out more <ArrowForwardIcon fontSize="small" />
+					</Link>
+				</Grid>
 			</Grid>
 		</Grid>
 	);

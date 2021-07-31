@@ -2,20 +2,37 @@ import SearchBar from '../components/SearchBar';
 import Grid from '@material-ui/core/Grid';
 import HomeTrafficCam from '../components/HomeTraficCam';
 import HomeErp from '../components/HomeErp';
-import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
 import IncidentsTicker from '../components/IncidentsTicker';
 import CoeInfo from '../components/CoeInfo';
+import img from '../img/pexels-photo-385997.jpeg';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
+	mainbody: {
+		height: '85vh',
+		width: '100vw',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginBottom: 60,
+	},
 	subbody: {
 		height: '100vh',
 		display: 'flex',
-		alignItems: 'center',
 	},
-	mainbody: {
-		height: '100vh',
+	ticker: {
+		width: '100%',
+	},
+	searchHome: {
+		border: '2px solid black',
+		display: 'flex',
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: '50vh',
+		width: '80vw',
+		backgroundImage: `url(${img})`,
+		backgroundPosition: 'center',
 	},
 }));
 
@@ -23,23 +40,24 @@ const Home = ({ handleSubmit, handleChange, query }) => {
 	const classes = useStyles();
 	return (
 		<Box className={classes.root}>
-			<Box className={classes.mainbody}>
+			<IncidentsTicker />
+			<Grid container className={classes.mainbody}>
 				<CoeInfo />
-				<IncidentsTicker />
-				<Box className="search_home">
+
+				<Grid item container className={classes.searchHome}>
 					<SearchBar
 						handleSubmit={handleSubmit}
 						handleChange={handleChange}
 						query={query}
 					/>
-				</Box>
-			</Box>
-			<Box className={classes.subbody}>
+				</Grid>
+			</Grid>
+			<Grid container className={classes.subbody}>
 				<HomeTrafficCam className={classes.subbody} />
-			</Box>
-			<Box>
+			</Grid>
+			<Grid container>
 				<HomeErp className={classes.subbody} />
-			</Box>
+			</Grid>
 		</Box>
 	);
 };

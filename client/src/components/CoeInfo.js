@@ -10,7 +10,6 @@ const useStyles = makeStyles((theme) => ({
 	root: {
 		flexGrow: 1,
 		justifyContent: 'center',
-		marginTop: 20,
 	},
 	paper: {
 		width: 250,
@@ -19,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	itemContent: {
 		justifyContent: 'center',
-		backgroundColor: '#F19485',
+		backgroundColor: '#EDB95D',
 		height: '35%',
 		alignItems: 'center',
 	},

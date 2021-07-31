@@ -1,13 +1,13 @@
-import axios from "axios";
-import React from "react";
-import { useEffect, useState } from "react";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
-import MapTwoToneIcon from "@material-ui/icons/MapTwoTone";
-import IconButton from "@material-ui/core/IconButton";
-import Box from "@material-ui/core/Box";
+import axios from 'axios';
+import React from 'react';
+import { useEffect, useState } from 'react';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import MapTwoToneIcon from '@material-ui/icons/MapTwoTone';
+import IconButton from '@material-ui/core/IconButton';
+import Box from '@material-ui/core/Box';
 
 function LocationCard({ element }) {
 	const useStyles = makeStyles({
@@ -16,12 +16,12 @@ function LocationCard({ element }) {
 			height: 300,
 		},
 		lots: {
-			display: "inline",
+			display: 'inline',
 		},
 	});
 	const [mapRedirectObj, setMapRedirectObj] = useState({
-		xCoord: "",
-		yCoord: "",
+		xCoord: '',
+		yCoord: '',
 	});
 
 	const url = `https://developers.onemap.sg/commonapi/convert/3414to4326?X=${element.xCoord}&Y=${element.yCoord}`;
@@ -43,8 +43,7 @@ function LocationCard({ element }) {
 					href={`https://www.google.com/maps?saddr=My+Location&daddr=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`}
 					target="_blank"
 					edge="start"
-					className={classes.btnIcon}
-				>
+					className={classes.btnIcon}>
 					<MapTwoToneIcon />
 				</IconButton>
 			</Box>
@@ -56,8 +55,7 @@ function LocationCard({ element }) {
 					Available lots:
 					<Typography
 						className={classes.lots}
-						color={element.availableLots < 5 ? "error" : "textSecondary"}
-					>
+						color={element.availableLots < 5 ? 'error' : 'textSecondary'}>
 						{element.availableLots}
 					</Typography>
 				</Typography>

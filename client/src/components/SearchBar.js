@@ -1,17 +1,51 @@
-import SearchIcon from "@material-ui/icons/Search";
-import Button from "@material-ui/core/Button";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Box from '@material-ui/core/Box';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import SearchIcon from '@material-ui/icons/Search';
 
-const SearchBar = ({ handleSubmit,query }) => {
+const useStyles = makeStyles((theme) => ({
+	root: {
+		backgroundColor: '#f5f5f5',
+		padding: '2px 4px',
+		display: 'flex',
+		alignItems: 'center',
+		width: '50vw',
+		borderRadius: 20,
+	},
+	input: {
+		marginLeft: theme.spacing(1),
+		flex: 1,
+	},
+	iconButton: {
+		padding: 10,
+	},
+}));
+
+const SearchBar = ({ handleSubmit, query }) => {
+	const classes = useStyles();
 	return (
-		<form onSubmit={(e)=>handleSubmit(e)} className="search_bar">
-			<SearchIcon className="search_inputIcon" />
-			<input type="text" name= 'query' required />
-			<div className="search_button">
-				<Button type="submit" variant="outlined">
-					Where To Park?
-				</Button>
-			</div>
-		</form>
+		<Box
+			component="form"
+			className={classes.root}
+			boxShadow={6}
+			elevation={6}
+			onSubmit={(e) => handleSubmit(e)}>
+			<InputBase
+				className={classes.input}
+				placeholder="Search Parking Lots"
+				inputProps={{ 'aria-label': 'search parking lots' }}
+				name="query"
+				required
+			/>
+			<IconButton
+				type="submit"
+				className={classes.iconButton}
+				aria-label="search">
+				<SearchIcon />
+			</IconButton>
+		</Box>
 	);
 };
 

@@ -9,7 +9,7 @@ import { Box } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
 	toolbar: {
 		borderBottom: `1px solid ${theme.palette.divider}`,
-		background: 'linear-gradient(10deg, #ED715D 50%, #5dd9ed 90%)',
+		background: 'linear-gradient(10deg, #ED715D 50%, #EDB95D 90%)',
 	},
 	toolbarTitle: {
 		fontFamily: 'Cinzel',
@@ -17,6 +17,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	toolbarSecondary: {
 		justifyContent: 'center',
+		backgroundColor: '#EDB95D',
 	},
 	toolbarLink: {
 		padding: theme.spacing(2),
@@ -26,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const Header = () => {
 	const classes = useStyles();
 	return (
-		<Box height="14vh">
+		<Box>
 			<Toolbar className={classes.toolbar}>
 				<Button size="small">Subscribe</Button>
 				<Typography

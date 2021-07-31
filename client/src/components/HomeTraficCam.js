@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
@@ -33,12 +33,19 @@ const useStyles = makeStyles((theme) => ({
 	btn: {
 		position: 'absolute',
 		right: '0',
-		color: '#ED715D',
+		display: 'flex',
+		background: 'linear-gradient(45deg, #ED715D 30%, #EDB95D 90%)',
+		borderRadius: 3,
+		border: 0,
+		color: 'white',
+		height: 48,
+		padding: '0 30px',
+		boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+		alignItems: 'center',
 	},
 }));
 const HomeTrafficCam = () => {
 	const classes = useStyles();
-	const history = useHistory();
 	return (
 		<Grid container className={classes.root} component={Paper}>
 			<Grid item className={classes.titleContainer}>
@@ -46,16 +53,17 @@ const HomeTrafficCam = () => {
 					To view
 					<br />
 					real-time footage of traffic <br />
-					conditions at specific locations, click on the button below.
+					conditions at specific locations, click on the BUTTON below.
 				</Typography>
 				<br />
 				<br />
 				<Button
 					className={classes.btn}
-					onClick={() => history.push('/traffic_cam')}>
-					<DoubleArrowIcon style={{ color: '#ED715D' }} fontSize="large" />
-					<DoubleArrowIcon style={{ color: '#ED715D' }} fontSize="medium" />
-					<DoubleArrowIcon style={{ color: '#ED715D' }} fontSize="small" />
+					component={RouterLink}
+					to="/traffic_cam">
+					<DoubleArrowIcon fontSize="medium" color="action" />
+					<DoubleArrowIcon fontSize="medium" color="action" />
+					<DoubleArrowIcon fontSize="medium" color="action" />
 				</Button>
 			</Grid>
 		</Grid>
