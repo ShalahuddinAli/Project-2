@@ -23,21 +23,25 @@ const controller = {
 			availability = data2.data.items[0].carpark_data;
 
 			if (location && availability) {
+				const locationObj = {};
 				const result = [];
+
 				for (const item of location) {
-					for (const element of availability) {
-						if (item.car_park_no === element.carpark_number) {
-							// compare both data, then merge into 1 state to render data
-							result.push({
-								address: item.address,
-								availableLots: element.carpark_info[0].lots_available,
-								totalLots: element.carpark_info[0].total_lots,
-								nonSeasonLot: item.short_term_parking,
-								freeParking: item.free_parking,
-								xCoord: item.x_coord,
-								yCoord: item.y_coord,
-							});
-						}
+					locationObj[item.car_park_no] = item;
+				}
+				for (const element of availability) {
+					if (locationObj[element.carpark_number]) {
+						// compare both data, then merge into 1 state to render data
+						result.push({
+							address: locationObj[element.carpark_number].address,
+							availableLots: element.carpark_info[0].lots_available,
+							totalLots: element.carpark_info[0].total_lots,
+							nonSeasonLot:
+								locationObj[element.carpark_number].short_term_parking,
+							freeParking: locationObj[element.carpark_number].free_parking,
+							xCoord: locationObj[element.carpark_number].x_coord,
+							yCoord: locationObj[element.carpark_number].y_coord,
+						});
 					}
 				}
 
