@@ -95,7 +95,10 @@ const CoeInfo = () => {
 										className={classes.icon}
 									/>
 								) : (
-									<TrendingDownIcon style={{ color: 'green' }} />
+									<TrendingDownIcon
+										style={{ color: 'green' }}
+										className={classes.icon}
+									/>
 								)}
 								<Typography
 									variant="caption"
