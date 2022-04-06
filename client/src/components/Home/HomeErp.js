@@ -1,11 +1,13 @@
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import img from '../img/erp.jpeg';
+
+import img from '../../img/erp.jpeg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

@@ -1,15 +1,16 @@
 import axios from 'axios';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
-import Container from '@material-ui/core/Container';
+import { useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
 import Box from '@material-ui/core/Box';
-import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
-import TrafficCard from '../components/TrafficCard';
+import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+
 import CamLocation from '../CameraLocation';
-import CheckBoxes from '../components/CheckBoxes';
+import CheckBoxes from '../components/TrafficCamera/CheckBoxes';
+import TrafficCard from '../components/TrafficCamera/TrafficCard';
 
 const TrafficCam = () => {
 	const [trafficImg, setTrafficImg] = useState([]);

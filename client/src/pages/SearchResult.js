@@ -1,10 +1,11 @@
-import SearchBar from '../components/SearchBar';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
-import LocationCard from '../components/LocationCard';
+import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+
 import Loading from '../components/Loading';
+import SearchBar from '../components/Search/SearchBar';
+import LocationCard from '../components/Search/LocationCard';
 
 const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 	const useStyles = makeStyles({
