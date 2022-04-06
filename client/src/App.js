@@ -18,8 +18,8 @@ const App = () => {
 		result: [],
 		isLoading: false,
 	});
-	const { queryLocation, result, isLoading } = queryCpObj;
 
+	const { queryLocation, result, isLoading } = queryCpObj;
 	const history = useHistory();
 
 	useEffect(() => {

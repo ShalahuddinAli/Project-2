@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import qs from 'query-string';
 import Container from '@material-ui/core/Container';
 import Box from '@material-ui/core/Box';
@@ -30,43 +30,74 @@ const TrafficCam = () => {
 			});
 	}, []);
 
-	const area = {}; //  to create an object with boolean values
-	for (const element of CamLocation) {
-		area[element.area] = false;
-	}
-
-	const result = []; // to segregate the key with "true" value into a single array
-	const [check, setCheck] = useState(area);
-
-	for (const element of Object.keys(check)) {
-		if (check[element] === true) {
-			result.push(element);
+	//  Initialize expressway object checkbox value
+	const areaBool = (camera) => {
+		const area = {};
+		for (const element of camera) {
+			area[element.area] = false;
 		}
-	}
+		return area;
+	};
+
+	const [checkBox, setCheckBox] = useState(areaBool(CamLocation));
+
+	// to segregate the expressway with "true" value into a single array
+	const trueArr = (check) => {
+		const arr = [];
+		for (const element of Object.keys(check)) {
+			if (checkBox[element] === true) {
+				arr.push(element);
+			}
+		}
+		return arr;
+	};
 
 	const handleChange = (event) => {
-		setCheck({ ...check, [event.target.name]: event.target.checked });
+		setCheckBox({ ...checkBox, [event.target.name]: event.target.checked });
 	};
 
 	useEffect(() => {
 		//match the key with "true" value with the data.
-		if (check) {
-			const resultAtLast = [];
-			for (const element of result) {
-				for (const item of CamLocation) {
-					if (element === item.area) {
-						resultAtLast.push(item);
-					}
+		if (checkBox) {
+			const result = [];
+
+			for (const item of CamLocation) {
+				if (checkBox[item.area]) {
+					result.push(item);
 				}
 			}
-			setResultImg(resultAtLast);
+
+			setResultImg(result);
 		}
 		// query string for traffic cam checkbox
 		history.replace({
 			pathname: '/traffic_cam',
-			search: qs.stringify({ area: result }),
+			search: qs.stringify({ area: trueArr(checkBox) }),
 		});
-	}, [check]);
+	}, [checkBox]);
+
+	const trafficImageResult = (trafficData) => {
+		const filterImgObj = {};
+
+		for (const img of resultImg) {
+			filterImgObj[img.camera_id] = img;
+		}
+
+		return trafficData.map((element) => {
+			if (filterImgObj[element.camera_id])
+				return (
+					<Grid item key={element.camera_id}>
+						<TrafficCard
+							img={element.image}
+							location={element.location}
+							id={element.camera_id}
+							road={filterImgObj[element.camera_id].location}
+							cluster={filterImgObj[element.camera_id].area}
+						/>
+					</Grid>
+				);
+		});
+	};
 
 	return (
 		<div>
@@ -74,27 +105,13 @@ const TrafficCam = () => {
 				<Box display="flex" justifyContent="center">
 					<Typography variant="h3">Traffic Cameras</Typography>
 				</Box>
-				<CheckBoxes area={area} check={check} handleChange={handleChange} />
+				<CheckBoxes
+					area={areaBool(CamLocation)}
+					checkBox={checkBox}
+					handleChange={handleChange}
+				/>
 
-				<Grid container>
-					{trafficImg &&
-						trafficImg.map((element) =>
-							resultImg.map((item) => {
-								if (element.camera_id === item.camera_id)
-									return (
-										<Grid item key={element.camera_id}>
-											<TrafficCard
-												img={element.image}
-												location={element.location}
-												id={element.camera_id}
-												road={item.location}
-												cluster={item.area}
-											/>
-										</Grid>
-									);
-							})
-						)}
-				</Grid>
+				<Grid container>{trafficImg && trafficImageResult(trafficImg)}</Grid>
 			</Container>
 		</div>
 	);

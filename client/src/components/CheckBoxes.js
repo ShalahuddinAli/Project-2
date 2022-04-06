@@ -18,9 +18,9 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const CheckBoxes = ({ area, check, handleChange }) => {
+const CheckBoxes = ({ area, checkBox, handleChange }) => {
 	const classes = useStyles();
-	const arrBool = Object.values(check); // to store the values of check object (true or false)
+	const arrBool = Object.values(checkBox); // to store the values of check object (true or false)
 
 	return (
 		<div className={classes.root}>

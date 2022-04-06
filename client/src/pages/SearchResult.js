@@ -1,6 +1,5 @@
 import SearchBar from '../components/SearchBar';
 import { makeStyles } from '@material-ui/core/styles';
-import { useLocation } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Container from '@material-ui/core/Container';
 import LocationCard from '../components/LocationCard';
@@ -21,10 +20,9 @@ const SearchResult = ({ result, query, isLoading, handleSubmit }) => {
 		},
 	});
 	const classes = useStyles();
-	const location = useLocation();
-	console.log(location);
 
-	console.log(result);
+	console.log(result, 'dsdadad');
+
 	return (
 		<Container>
 			<div className={classes.search}>
