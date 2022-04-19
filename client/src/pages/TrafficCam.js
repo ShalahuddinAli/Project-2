@@ -1,6 +1,6 @@
 import axios from 'axios';
 import qs from 'query-string';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 
 import Box from '@material-ui/core/Box';
@@ -15,7 +15,7 @@ import TrafficCard from '../components/TrafficCamera/TrafficCard';
 const TrafficCam = () => {
 	const [trafficImg, setTrafficImg] = useState([]);
 	const [resultImg, setResultImg] = useState([]);
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const camImageUrl = '/proxyServer/traffic_cam';
@@ -71,10 +71,13 @@ const TrafficCam = () => {
 			setResultImg(result);
 		}
 		// query string for traffic cam checkbox
-		history.replace({
-			pathname: '/traffic_cam',
-			search: qs.stringify({ area: trueArr(checkBox) }),
-		});
+		navigate(
+			{
+				pathname: '/traffic_cam',
+				search: qs.stringify({ area: trueArr(checkBox) }),
+			},
+			{ replace: true }
+		);
 	}, [checkBox]);
 
 	const trafficImageResult = (trafficData) => {

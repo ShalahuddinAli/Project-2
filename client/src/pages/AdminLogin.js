@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { makeStyles } from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
@@ -69,7 +69,7 @@ const AdminLogin = () => {
 	const [loading, setLoading] = useState(false);
 	const [success, setSuccess] = useState({ status: true, message: '' });
 
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	const { username, password } = admin;
 	const { status, message } = success;
@@ -86,7 +86,7 @@ const AdminLogin = () => {
 			.then((res) => {
 				if (res.data.accessToken) {
 					localStorage.setItem('token', res.data.accessToken);
-					history.push('/');
+					navigate('/');
 				} else {
 					setSuccess({ status: false, message: res.data });
 					console.log(res.data);

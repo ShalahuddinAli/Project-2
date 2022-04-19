@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import React, { useState, useEffect, Fragment } from 'react';
 import './App.css';
 import Header from './components/Header';
@@ -20,11 +20,11 @@ const App = () => {
 	});
 
 	const { queryLocation, result, isLoading } = queryCpObj;
-	const history = useHistory();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (queryCpObj.queryLocation) {
-			history.push({
+			navigate({
 				pathname: '/search_result',
 				search: `?location=${queryLocation}`,
 			});
@@ -51,37 +51,32 @@ const App = () => {
 	return (
 		<div className="App">
 			<Header />
-			<Switch>
-				<Route path="/admin">
-					<AdminLogin />
-				</Route>
+			<Routes>
+				<Route path="/admin" element={<AdminLogin />} />
+
 				<Fragment>
-					<Route path="/" exact>
-						<Home handleSubmit={handleSubmit} query={queryLocation} />
-					</Route>
-					<Route path="/about">
-						<About />
-					</Route>
-					<Route path="/contact">
-						<Contact />
-					</Route>
-					<Route path="/search_result">
-						<SearchResult
-							isLoading={isLoading}
-							query={queryLocation}
-							result={result}
-							handleSubmit={handleSubmit}
-							// handleChange={handleChange}
-						/>
-					</Route>
-					<Route path="/traffic_cam">
-						<TrafficCam />
-					</Route>
-					<Route path="/erp">
-						<Erp />
-					</Route>
+					<Route
+						path="/"
+						element={<Home handleSubmit={handleSubmit} query={queryLocation} />}
+					/>
+					<Route path="/about" element={<About />} />
+					<Route path="/contact" element={<Contact />} />
+					<Route
+						path="/search_result"
+						element={
+							<SearchResult
+								isLoading={isLoading}
+								query={queryLocation}
+								result={result}
+								handleSubmit={handleSubmit}
+								// handleChange={handleChange}
+							/>
+						}
+					/>
+					<Route path="/traffic_cam" element={<TrafficCam />} />
+					<Route path="/erp" element={<Erp />} />]
 				</Fragment>
-			</Switch>
+			</Routes>
 			<Footer />
 		</div>
 	);
