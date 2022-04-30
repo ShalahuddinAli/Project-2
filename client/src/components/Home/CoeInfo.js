@@ -1,59 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import TrendingDownIcon from '@material-ui/icons/TrendingDown';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import TrendUp from '@heroicons/react/outline/ChevronDoubleUpIcon';
+import TrendDown from '@heroicons/react/outline/ChevronDoubleDownIcon';
 
 import coeInfo from '../../coeInfo';
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		flexGrow: 1,
-		justifyContent: 'center',
-	},
-	paper: {
-		width: 250,
-		height: 150,
-		justifyContent: 'center',
-	},
-	itemContent: {
-		justifyContent: 'center',
-		backgroundColor: '#EDB95D',
-		height: '35%',
-		alignItems: 'center',
-	},
-	cat: {
-		textAlign: 'center',
-	},
-	desc: {
-		textAlign: 'center',
-	},
-
-	premText: {
-		textAlign: 'center',
-	},
-	prem: {
-		justifyContent: 'center',
-		height: '65%',
-		width: '100%',
-		alignItems: 'center',
-	},
-	iconContainer: {
-		margin: '0 30px 0 0',
-		height: '100%',
-	},
-	icon: {
-		display: 'block',
-		fontSize: 60,
-	},
-}));
-
 const CoeInfo = () => {
-	const classes = useStyles();
 	const [coe, setCoe] = useState([]);
 
 	useEffect(() => {
@@ -66,67 +17,45 @@ const CoeInfo = () => {
 			.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	};
 	return (
-		<Grid
-			container
-			className={classes.root}
-			spacing={2}
-			xs={3}
-			sm={6}
-			md={9}
-			lg={12}>
+		<div className="flex flex-col items-center md:flex-row md:my-8 w-full">
 			{coe.map((item, index) => (
-				<Grid item key={index}>
-					<Paper className={classes.paper} elevation={3}>
-						<Grid container className={classes.itemContent}>
-							<Grid item>
-								<Typography className={classes.cat} variant="h6">
-									{item.category}
-									<Typography variant="subtitle2" className={classes.desc}>
-										({item.descriptions})
-									</Typography>
-								</Typography>
-							</Grid>
-						</Grid>
-						<Grid container className={classes.prem}>
-							<Grid item className={classes.iconContainer}>
-								{item.premium.current > item.premium.previous ? (
-									<TrendingUpIcon
-										style={{ color: 'red' }}
-										className={classes.icon}
-									/>
-								) : (
-									<TrendingDownIcon
-										style={{ color: 'green' }}
-										className={classes.icon}
-									/>
-								)}
-								<Typography
-									variant="caption"
-									style={{
-										color:
-											item.premium.current - item.premium.previous > 0
-												? 'red'
-												: 'green',
-									}}
-									className={classes.premDiff}>
-									$
-									{numberWithCommas(
-										item.premium.current - item.premium.previous
-									)}
-								</Typography>
-							</Grid>
-							<CssBaseline />
-							<Grid item>
-								<Typography className={classes.premText} variant="h5">
-									${numberWithCommas(item.premium.current)}
-								</Typography>
-								<Typography variant="subtitle2">(Quota Premium)</Typography>
-							</Grid>
-						</Grid>
-					</Paper>
-				</Grid>
+				<div
+					key={index}
+					className="my-2 w-full md:m-3 md:shadow-xl md:border md:rounded-lg">
+					<div className="flex bg-coe justify-center md:flex-col md:items-center md:h-20 md:rounded-t-lg customcoe:h-14">
+						<p className="text-xs md:text-base">{item.category}</p>
+						<p className="text-xs md:px-2">({item.descriptions})</p>
+					</div>
+					<div className="flex justify-around pt-3 md:py-5">
+						<div className="flex md:flex-col md:justify-center">
+							<p className="text-sm md:hidden">Change:</p>
+							{item.changes === 'increase' ? (
+								<TrendUp className="h-4 text-red-600 mt-0.5 align-bottom md:text-base md:h-8" />
+							) : (
+								<TrendDown className="h-4 text-green-600 mt-0.5 md:text-base md:h-6" />
+							)}
+							<p
+								className={`text-sm ${
+									item.changes === 'increase'
+										? 'text-red-600'
+										: 'text-green-600'
+								} w-14 text-left md:text-center md:text-xs`}>
+								${numberWithCommas(item.amount)}
+							</p>
+						</div>
+						<div className="flex md:flex-col">
+							<p className="text-sm md:hidden">Quota Premium:</p>
+							<p className="text-sm md:text-lg md:text-center">
+								${numberWithCommas(item.premium)}
+							</p>
+							<p className="text-xs hidden md:inline-flex text-center">
+								(Quota Premium)
+							</p>
+						</div>
+					</div>
+				</div>
 			))}
-		</Grid>
+		</div>
 	);
 };
 

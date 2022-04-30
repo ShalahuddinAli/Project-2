@@ -41,26 +41,28 @@ const useStyles = makeStyles((theme) => ({
 const Home = ({ handleSubmit, handleChange, query }) => {
 	const classes = useStyles();
 	return (
-		<Box className={classes.root}>
+		<div className="h-full w-full flex flex-col items-center">
 			<IncidentsTicker />
-			<Grid container className={classes.mainbody}>
-				<CoeInfo />
 
-				<Grid item container className={classes.searchHome}>
-					<SearchBar
-						handleSubmit={handleSubmit}
-						handleChange={handleChange}
-						query={query}
-					/>
-				</Grid>
-			</Grid>
-			<Grid container className={classes.subbody}>
-				<HomeTrafficCam className={classes.subbody} />
-			</Grid>
-			<Grid container>
-				<HomeErp className={classes.subbody} />
-			</Grid>
-		</Box>
+			<CoeInfo />
+
+			<div
+				className="h-[32rem] w-10/12 flex justify-center items-center my-4 border border-black "
+				style={{
+					backgroundImage: `url(${img})`,
+					backgroundPosition: 'center',
+				}}>
+				<SearchBar
+					handleSubmit={handleSubmit}
+					handleChange={handleChange}
+					query={query}
+				/>
+			</div>
+
+			<HomeTrafficCam />
+
+			<HomeErp />
+		</div>
 	);
 };
 

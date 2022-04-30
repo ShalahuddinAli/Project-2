@@ -1,77 +1,36 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import GitHubIcon from '@material-ui/icons/GitHub';
-import LinkedInIcon from '@material-ui/icons/LinkedIn';
-import Box from '@material-ui/core/Box';
 
-const Copyright = () => {
-	return (
-		<Typography variant="body2" color="textSecondary" align="center">
-			{'Copyright © '}
-			{new Date().getFullYear()} <Link to="/contact">Shalahuddin Ali</Link>
-		</Typography>
-	);
-};
-
-const useStyles = makeStyles((theme) => ({
-	footer: {
-		backgroundColor: '#E8492F',
-		marginTop: 'auto',
-		padding: '1em',
-		width: '100%',
-		fontFamily: 'Cinzel',
-		display: 'flex',
-		flexDirection: 'column',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	text: {
-		fontFamily: 'Cinzel',
-	},
-}));
+import { ReactComponent as GithubSvg } from '../img/github.svg';
+import { ReactComponent as LinkedinSvg } from '../img/linkedin.svg';
 
 const Footer = () => {
-	const classes = useStyles();
-
 	return (
-		<footer className={classes.footer}>
-			<Typography
-				variant="h6"
-				align="center"
-				className={classes.text}
-				gutterBottom>
+		<footer className="flex flex-col justify-center items-center align-middle bg-hot py-2">
+			<h6 className="text-md font-cinzel m-0 p-0 md:text-xl md:mt-2 ">
 				Parking Hunter
-			</Typography>
-			<Box
-				component="div"
-				display="flex"
-				direction="row"
-				justifyContent="flex-end"
-				alignItems="center"
-				width="29%">
-				<Copyright />
-				<Box component="div" marginLeft="2vw">
-					<IconButton
-						aria-label="GitHub"
-						className={classes.btn}
-						size="small"
-						href="https://github.com/ShalahuddinAli/carpark-finder-app"
-						target="_blank">
-						<GitHubIcon fontSize="small" />
-					</IconButton>
-					<IconButton
-						aria-label="LinkedIn"
-						className={classes.btn}
-						size="medium"
+			</h6>
+			<div className="flex flex-col">
+				<div className="flex">
+					<span className="text-center align-middle mx-1 text-xs">
+						Copyright© {new Date().getFullYear()}
+					</span>
+					<Link
+						to="/contact"
+						className="text-center align-middle mx-1 text-xs hover:underline">
+						Shalahuddin Ali
+					</Link>
+				</div>
+				<div className="flex justify-center">
+					<a href="https://github.com/shalahuddinali" className="m-1">
+						<GithubSvg />
+					</a>
+					<a
 						href="https://www.linkedin.com/in/shalahuddin-ali/"
-						target="_blank">
-						<LinkedInIcon fontSize="small" />
-					</IconButton>
-				</Box>
-			</Box>
+						className="m-1">
+						<LinkedinSvg />
+					</a>
+				</div>
+			</div>
 		</footer>
 	);
 };

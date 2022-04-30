@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Header from './components/Header';
 import Home from './pages/Home';
@@ -38,7 +38,7 @@ const App = () => {
 					console.log(error);
 				});
 		}
-	}, [queryLocation]);
+	}, [queryLocation, navigate, queryCpObj]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -49,12 +49,11 @@ const App = () => {
 		});
 	};
 	return (
-		<div className="App">
+		<div className="flex flex-col min-h-screen">
 			<Header />
-			<Routes>
-				<Route path="/admin" element={<AdminLogin />} />
-
-				<Fragment>
+			<div className="flex-1">
+				<Routes>
+					<Route path="/admin" element={<AdminLogin />} />
 					<Route
 						path="/"
 						element={<Home handleSubmit={handleSubmit} query={queryLocation} />}
@@ -75,8 +74,8 @@ const App = () => {
 					/>
 					<Route path="/traffic_cam" element={<TrafficCam />} />
 					<Route path="/erp" element={<Erp />} />]
-				</Fragment>
-			</Routes>
+				</Routes>
+			</div>
 			<Footer />
 		</div>
 	);

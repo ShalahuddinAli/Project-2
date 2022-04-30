@@ -36,7 +36,7 @@ const GetNews = () => {
 
 const IncidentsTicker = () => {
 	return (
-		<div className="newsticker">
+		<div className="w-full">
 			<Ticker isNewsTicker={true} show={true}>
 				<GetNews />
 			</Ticker>
