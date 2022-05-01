@@ -4,7 +4,7 @@ let express = require('express');
 const CoeSchema = new Schema({
 	coe_data: [
 		{
-			title: {
+			category: {
 				type: String,
 				required: true,
 			},
@@ -29,6 +29,6 @@ const CoeSchema = new Schema({
 	],
 });
 
-const Coe = model('coe', AdminSchema);
+const Coe = model('coe', CoeSchema);
 
 module.exports = Coe;

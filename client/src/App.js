@@ -1,18 +1,23 @@
 import axios from 'axios';
 import { Route, Routes, useNavigate } from 'react-router-dom';
-import React, { useState, useEffect, Fragment } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Header from './components/Header';
 import Home from './pages/Home';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
 import SearchResult from './pages/SearchResult';
 import TrafficCam from './pages/TrafficCam';
+import CoeData from './pages/CoeData';
+import Header from './components/Header';
 import Footer from './components/Footer';
 import Erp from './pages/Erp';
 
 const App = () => {
+	const auth = localStorage.getItem('token');
+	const [coe, setCoe] = useState({});
+	const [loading, setLoading] = useState(false);
+
 	const [queryCpObj, setQueryCpObj] = useState({
 		queryLocation: '',
 		result: [],
@@ -21,6 +26,21 @@ const App = () => {
 
 	const { queryLocation, result, isLoading } = queryCpObj;
 	const navigate = useNavigate();
+
+	useEffect(() => {
+		const getCoe = async () => {
+			setLoading(true);
+			try {
+				const { data } = await axios.get('/coe/getCoe');
+				setCoe(data);
+			} catch (error) {
+				console.error(error.message);
+			} finally {
+				setLoading(false);
+			}
+		};
+		getCoe();
+	}, []);
 
 	useEffect(() => {
 		if (queryCpObj.queryLocation) {
@@ -50,34 +70,42 @@ const App = () => {
 	};
 	return (
 		<div className="App">
-			<Header />
 			<Routes>
-				<Route path="/admin" element={<AdminLogin />} />
-
-				<Fragment>
-					<Route
-						path="/"
-						element={<Home handleSubmit={handleSubmit} query={queryLocation} />}
-					/>
-					<Route path="/about" element={<About />} />
-					<Route path="/contact" element={<Contact />} />
-					<Route
-						path="/search_result"
-						element={
-							<SearchResult
-								isLoading={isLoading}
-								query={queryLocation}
-								result={result}
-								handleSubmit={handleSubmit}
-								// handleChange={handleChange}
-							/>
-						}
-					/>
-					<Route path="/traffic_cam" element={<TrafficCam />} />
-					<Route path="/erp" element={<Erp />} />]
-				</Fragment>
+				{!auth && <Route path="/admin" element={<AdminLogin />} />}
+				<Route
+					path="/"
+					element={
+						<Home handleSubmit={handleSubmit} query={queryLocation} coe={coe} />
+					}
+				/>
+				{auth && (
+					<Route path="/coe" element={<CoeData auth={auth} coe={coe} />} />
+				)}
+				<Route path="/about" element={<About />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route
+					path="/search_result"
+					element={
+						<SearchResult
+							isLoading={isLoading}
+							query={queryLocation}
+							result={result}
+							handleSubmit={handleSubmit}
+							// handleChange={handleChange}
+						/>
+					}
+				/>
+				<Route path="/traffic_cam" element={<TrafficCam />} />
+				<Route path="/erp" element={<Erp />} />
+				<Route
+					path="*"
+					element={
+						<main style={{ padding: '1rem' }}>
+							<p>There's nothing here!</p>
+						</main>
+					}
+				/>
 			</Routes>
-			<Footer />
 		</div>
 	);
 };

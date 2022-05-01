@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const proxyRouter = require('./routes/proxy');
 const adminRouter = require('./routes/admin');
+const coeRouter = require('./routes/coe');
 
 require('dotenv').config();
 
@@ -26,6 +27,7 @@ mongoose.connection.once('open', () => {
 
 app.use('/proxyServer', proxyRouter);
 app.use('/admin', adminRouter);
+app.use('/coe', coeRouter);
 
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '/client/build')));
@@ -41,4 +43,4 @@ if (process.env.NODE_ENV === 'production') {
 
 const PORT = process.env.PORT || 4000;
 
-app.listen(PORT, () => console.log(`Listening...`));
+app.listen(PORT, () => console.log(`Listening... PORT:${PORT}`));
