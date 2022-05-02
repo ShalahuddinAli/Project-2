@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import TrendUp from '@heroicons/react/outline/ChevronDoubleUpIcon';
 import TrendDown from '@heroicons/react/outline/ChevronDoubleDownIcon';
+import { numberWithCommas } from '../../utils';
 
 const CoeInfo = ({ coe }) => {
 	const coeChanges = (current, prev) => current - prev;
-
-	const numberWithCommas = (num) => {
-		if (num === 0) return 'No Change';
-		return Math.abs(num)
-			.toString()
-			.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-	};
 
 	const changeSymbol = (current, prev) => {
 		const changes = coeChanges(current, prev);

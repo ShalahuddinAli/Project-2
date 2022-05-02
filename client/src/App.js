@@ -11,6 +11,7 @@ import AdminLogin from './pages/AdminLogin';
 import SearchResult from './pages/SearchResult';
 import TrafficCam from './pages/TrafficCam';
 import CoeData from './pages/CoeData';
+import AddCoe from './pages/AddCoe';
 import Erp from './pages/Erp';
 
 const App = () => {
@@ -91,6 +92,7 @@ const App = () => {
 					{/* {auth && ( */}
 					<Route path="/coe" element={<CoeData auth={auth} coe={coe} />} />
 					{/* )} */}
+					<Route path="/add-coe" element={<AddCoe auth={auth} coe={coe} />} />
 					<Route path="/about" element={<About />} />
 					<Route path="/contact" element={<Contact />} />
 					<Route
