@@ -1,7 +1,14 @@
+import { useNavigate } from 'react-router-dom';
 import { numberWithCommas } from '../utils';
 
 const CoeData = ({ coe, auth }) => {
-	console.log(coe);
+	const navigate = useNavigate();
+
+	const handleNavigate = () => {
+		event.preventDefault();
+		navigate('/add-coe', { replace: true });
+	};
+
 	return (
 		<div className="container flex justify-center mx-auto mt-20 md:mt-10">
 			<div className="flex flex-col">
@@ -27,7 +34,7 @@ const CoeData = ({ coe, auth }) => {
 									coe.data.map((item) => (
 										<tr className="whitespace-nowrap" key={item._id}>
 											<td className="px-6 py-4 text-sm text-gray-700 md:text-md xl:text-lg">
-												{item.category}{' '}
+												{item.category}
 												<span className="hidden text-md md:inline xl:text-lg">
 													({item.descriptions})
 												</span>
@@ -37,7 +44,6 @@ const CoeData = ({ coe, auth }) => {
 													${numberWithCommas(item.current_premium)}
 												</div>
 											</td>
-
 											<td className="px-6 py-4">
 												<a href="#">
 													<svg
@@ -47,9 +53,9 @@ const CoeData = ({ coe, auth }) => {
 														viewBox="0 0 24 24"
 														stroke="currentColor">
 														<path
-															stroke-linecap="round"
-															stroke-linejoin="round"
-															stroke-width="2"
+															strokeLinecap="round"
+															strokeLinejoin="round"
+															strokeWidth="2"
 															d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 
                       2 0 112.828 
                       2.828L11.828 15H9v-2.828l8.586-8.586z"
@@ -63,8 +69,10 @@ const CoeData = ({ coe, auth }) => {
 						</table>
 					</div>
 				</div>
-				<button className="mt-8 text-gray-900 bg-secondary font-bold py-2 px-4 border-b-4 hover:border-b-2 border-gray-500 hover:border-gray-100 rounded-full">
-					Add New Result
+				<button
+					className="mt-8 text-gray-900 bg-secondary font-bold py-2 px-4 border-b-4 hover:border-b-2 border-gray-500 hover:border-gray-100 rounded-full"
+					onClick={handleNavigate}>
+					Add New Results
 				</button>
 			</div>
 		</div>

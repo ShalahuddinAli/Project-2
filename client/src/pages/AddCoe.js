@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../img/firdouss-ross-pFJtmoDMSAo-unsplash.jpg';
 import { months } from '../utils';
@@ -15,6 +15,8 @@ const AddCoe = ({ coe }) => {
 		'Cat E': '',
 	});
 
+	const { year, month, quarter } = period;
+
 	const handlePeriod = () => {
 		setPeriod((prev) => {
 			return {
@@ -28,11 +30,19 @@ const AddCoe = ({ coe }) => {
 		setCoeData((prev) => {
 			return { ...prev, [event.target.id]: event.target.value };
 		});
-		console.log(event.target.id);
 	};
+	console.log(year);
 
-	const handleSubmit = () => {
+	const handleSubmit = async () => {
 		event.preventDefault();
+
+		const reqData = { year, month, quarter, data: coeData };
+		const res = await axios.post('/coe/addCoe', reqData, {
+			headers: {
+				'x-auth-token': localStorage.getItem('token'),
+			},
+		});
+		console.log(res);
 	};
 
 	return (
@@ -56,7 +66,7 @@ const AddCoe = ({ coe }) => {
 										className="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-1 pr-8 mb-3 rounded md:px-3"
 										id="year"
 										onChange={handlePeriod}
-										value={period.year}>
+										value={year}>
 										<option>{new Date().getFullYear()}</option>
 										<option>{new Date().getFullYear() + 1}</option>
 									</select>
@@ -73,7 +83,7 @@ const AddCoe = ({ coe }) => {
 										className="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-1 pr-8 mb-3 rounded md:px-3"
 										id="month"
 										onChange={handlePeriod}
-										value={period.month}>
+										value={month}>
 										{months.map((month, index) => (
 											<option key={index} value={index + 1}>
 												{month}
@@ -95,7 +105,7 @@ const AddCoe = ({ coe }) => {
 										className="w-full bg-gray-200 border border-gray-200 text-black text-xs py-3 px-4 pr-8 mb-3 rounded"
 										id="quarter"
 										onChange={handlePeriod}
-										value={period.quarter}>
+										value={quarter}>
 										<option value={1}>Q1</option>
 										<option value={2}>Q2</option>
 									</select>

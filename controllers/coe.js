@@ -3,7 +3,7 @@ const CoeModel = require('../models/Coe');
 const controller = {
 	getCoe: async (_req, res) => {
 		try {
-			const data = await CoeModel.findOne().sort({ _id: -1 });
+			const data = await CoeModel.findOne().sort({ _id: -1 }).exec();
 			res.status(200).json(data);
 		} catch (error) {
 			return res.status(500).json(error);
@@ -12,8 +12,53 @@ const controller = {
 	addCoe: async (req, res) => {
 		const { year, month, quarter, data } = req.body;
 
+		console.log(req.body, 'addCoe');
+
+		const queryParams = {};
+
+		if (quarter === 2) {
+			queryParams.quarter = 1;
+			queryParams.year = year;
+			queryParams.month = month;
+		}
+
+		if (quarter === 1 && month > 1) {
+			queryParams.quarter = 2;
+			queryParams.year = year;
+			queryParams.month = month - 1;
+		}
+
+		if (quarter === 1 && month === 1) {
+			queryParams.quarter = 2;
+			queryParams.year = year - 1;
+			queryParams.month = month - 1;
+		}
+
+		let prevData;
+
 		try {
-			await CoeModel.create({ year, month, quarter, data });
+			prevData = await CoeModel.findOne(queryParams).exec();
+		} catch (error) {
+			return res.status(500).json(error);
+		}
+
+		if (!prevData) {
+			return res.status(400).json({ message: 'Invalid request' });
+		}
+
+		const newDbDoc = { year, month, quarter, data: [] };
+
+		for (let item of prevData.data) {
+			newDbDoc.data.push({
+				category: item.category,
+				descriptions: item.descriptions,
+				current_premium: data[item.category],
+				prev_premium: item.current_premium,
+			});
+		}
+
+		try {
+			await CoeModel.create(newDbDoc);
 			return res.status(201).json({ message: 'Added Successfully' });
 		} catch (error) {
 			return res.status(500).json(error);

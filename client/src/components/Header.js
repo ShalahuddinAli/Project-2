@@ -44,6 +44,13 @@ const Header = () => {
 					className="m-0.5 text-xs hover:underline md:text-base md:m-2">
 					Contact
 				</Link>
+				{auth && (
+					<Link
+						to="/coe"
+						className="m-0.5 text-xs hover:underline md:text-base md:m-2">
+						COE
+					</Link>
+				)}
 			</nav>
 		</header>
 	);
