@@ -1,6 +1,18 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
+	const navigate = useNavigate();
+	const auth = localStorage.getItem('token');
+
+	const handleClick = (e) => {
+		e.preventDefault();
+		if (auth) {
+			localStorage.removeItem('token');
+			navigate('/', { replace: true });
+		} else {
+			navigate('/login', { replace: true });
+		}
+	};
 	return (
 		<header>
 			<div className="bg-gradient-to-tr from-primary via-primary to-secondary flex h-12 md:h-16 justify-between items-center">
@@ -11,9 +23,9 @@ const Header = () => {
 					Parking Hunter
 				</h1>
 				<button
-					href="/admin"
-					className="mr-2 text-xs border-[0.5px] px-2 py-1 border-black rounded-md cursor-pointer hover:shadow md:px-3 md:mr-5 md:text-base active:bg-primary ">
-					Admin
+					className="mr-2 text-xs border-[0.5px] px-2 py-1 border-black rounded-md cursor-pointer hover:shadow md:px-3 md:mr-5 md:text-base active:bg-primary "
+					onClick={(e) => handleClick(e)}>
+					{auth ? 'Sign Out' : 'Admin'}
 				</button>
 			</div>
 			<nav className="flex justify-center bg-secondary">

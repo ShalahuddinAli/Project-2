@@ -6,11 +6,11 @@ const controller = {
 	getCarpark: async (req, res) => {
 		let location;
 		let availability;
-		console.log(req.body, 'hello');
+
 		const requestLocation = axios.get(
 			`https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q={"address":"${req.params.location}"}`
 		);
-
+		//only provides cp availability with cp no. only
 		const requestAvailability = axios.get(
 			`https://api.data.gov.sg/v1/transport/carpark-availability`
 		);
@@ -31,7 +31,7 @@ const controller = {
 				}
 				for (const element of availability) {
 					if (locationObj[element.carpark_number]) {
-						// compare both data, then merge into 1 state to render data
+						// compare both data, then merge into 1 data
 						result.push({
 							address: locationObj[element.carpark_number].address,
 							availableLots: element.carpark_info[0].lots_available,
@@ -52,7 +52,7 @@ const controller = {
 		}
 	},
 
-	getTrafficCam: async (req, res) => {
+	getTrafficCam: async (_req, res) => {
 		const BASE_URL = 'https://api.data.gov.sg/v1/transport/traffic-images';
 
 		try {
@@ -60,11 +60,11 @@ const controller = {
 
 			res.json(data.items[0].cameras);
 		} catch (error) {
-			res.json({ message: 'error' });
+			res.sendStatus(500);
 		}
 	},
 
-	getTrafficNews: async (req, res) => {
+	getTrafficNews: async (_req, res) => {
 		const BASE_URL =
 			'http://datamall2.mytransport.sg/ltaodataservice/TrafficIncidents';
 

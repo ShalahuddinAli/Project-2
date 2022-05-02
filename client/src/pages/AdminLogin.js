@@ -20,7 +20,7 @@ function Copyright() {
 			{'Copyright © '}
 			{new Date().getFullYear()}
 			{'.'}
-			<Link to="/">Where To Park?</Link>{' '}
+			<Link to="/">Parking Hunter</Link>{' '}
 		</Typography>
 	);
 }

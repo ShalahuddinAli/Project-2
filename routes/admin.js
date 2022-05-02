@@ -4,7 +4,6 @@ const router = express.Router();
 const auth = require('../middleware/auth');
 
 router.post('/login', controller.login);
-router.post('/addCoe', auth, controller.addCoe);
-router.post('/editCoe', auth, controller.editCoe);
+router.post('/addAdmin', controller.addAdmin);
 
 module.exports = router;
