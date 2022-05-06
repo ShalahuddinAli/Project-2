@@ -4,7 +4,7 @@ import { numberWithCommas } from '../utils';
 const CoeData = ({ coe, auth }) => {
 	const navigate = useNavigate();
 
-	const handleNavigate = () => {
+	const handleNavigate = (event) => {
 		event.preventDefault();
 		navigate('/add-coe', { replace: true });
 	};

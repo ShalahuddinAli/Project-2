@@ -17,7 +17,7 @@ const AddCoe = ({ coe }) => {
 
 	const { year, month, quarter } = period;
 
-	const handlePeriod = () => {
+	const handlePeriod = (event) => {
 		setPeriod((prev) => {
 			return {
 				...prev,
@@ -26,14 +26,14 @@ const AddCoe = ({ coe }) => {
 		});
 	};
 
-	const handleChange = () => {
+	const handleChange = (event) => {
 		setCoeData((prev) => {
 			return { ...prev, [event.target.id]: event.target.value };
 		});
 	};
 	console.log(year);
 
-	const handleSubmit = async () => {
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 
 		const reqData = { year, month, quarter, data: coeData };
