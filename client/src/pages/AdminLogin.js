@@ -84,6 +84,7 @@ const AdminLogin = () => {
 				password: e.target.password.value,
 			})
 			.then((res) => {
+				console.log(res.data);
 				if (res.data.accessToken) {
 					localStorage.setItem('token', res.data.accessToken);
 					navigate('/');

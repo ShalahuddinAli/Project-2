@@ -38,7 +38,9 @@ const AddCoe = ({ coe }) => {
 
 		const reqData = { year, month, quarter, data: coeData };
 		const res = await axios.post('/coe/addCoe', reqData, {
+			withCredentials: true,
 			headers: {
+				'Content-Type': 'application/json',
 				'x-auth-token': localStorage.getItem('token'),
 			},
 		});

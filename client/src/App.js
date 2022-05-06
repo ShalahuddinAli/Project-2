@@ -59,7 +59,7 @@ const App = () => {
 					console.log(error);
 				});
 		}
-	}, [queryLocation, navigate, queryCpObj]);
+	}, [queryLocation]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();

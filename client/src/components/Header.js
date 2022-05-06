@@ -1,12 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Header = () => {
 	const navigate = useNavigate();
 	const auth = localStorage.getItem('token');
 
-	const handleClick = (e) => {
+	const handleClick = async (e) => {
 		e.preventDefault();
+
 		if (auth) {
+			const data = await axios.post(
+				'/admin/logout',
+				{},
+				{
+					headers: {
+						'Content-Type': 'application/json',
+						'x-auth-token': auth,
+					},
+					withCredentials: true,
+				}
+			);
 			localStorage.removeItem('token');
 			navigate('/', { replace: true });
 		} else {
