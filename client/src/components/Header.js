@@ -9,6 +9,7 @@ const Header = () => {
 		e.preventDefault();
 
 		if (auth) {
+			console.log('hrllooo');
 			const data = await axios.post(
 				'/admin/logout',
 				{},
