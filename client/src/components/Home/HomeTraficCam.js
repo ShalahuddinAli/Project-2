@@ -8,7 +8,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import DoubleArrowIcon from '@material-ui/icons/DoubleArrow';
 
-import img from '../../img/trafficCam.jpeg';
+import img from '../../assets/images/trafficCam.jpeg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

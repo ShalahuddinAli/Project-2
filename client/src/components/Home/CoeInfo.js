@@ -30,7 +30,7 @@ const CoeInfo = ({ coe }) => {
 		if (changes === 0) return 'text-black';
 	};
 	return (
-		<div className="flex flex-col items-center md:flex-row md:my-8 w-full">
+		<div className="flex flex-col w-full items-center md:flex-row md:my-8 md:w-11/12">
 			{coe.map((item) => (
 				<div
 					key={item._id}

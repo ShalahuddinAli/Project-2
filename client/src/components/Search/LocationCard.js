@@ -1,23 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import MapTwoToneIcon from '@material-ui/icons/MapTwoTone';
-import IconButton from '@material-ui/core/IconButton';
-import Box from '@material-ui/core/Box';
-
-function LocationCard({ element }) {
-	const useStyles = makeStyles({
-		root: {
-			margin: 20,
-			height: 300,
-		},
-		lots: {
-			display: 'inline',
-		},
-	});
+import { MapDirectionIcon } from '../../assets/Svg';
+const LocationCard = ({ element }) => {
 	const [mapRedirectObj, setMapRedirectObj] = useState({
 		xCoord: '',
 		yCoord: '',
@@ -34,42 +18,42 @@ function LocationCard({ element }) {
 		});
 	}, []);
 
-	const classes = useStyles();
 	return (
-		<Card className={classes.root}>
-			<Box display="flex" justifyContent="flex-end" flexDirection="row">
-				<IconButton
+		<div className="border-2 m-4 p-4 h-64 rounded-lg shadow-lg">
+			<div className="flex justify-end flex-row">
+				<button
 					href={`https://www.google.com/maps?saddr=My+Location&daddr=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`}
 					target="_blank"
 					edge="start"
-					className={classes.btnIcon}>
-					<MapTwoToneIcon />
-				</IconButton>
-			</Box>
-			<CardContent className={classes.cardContent}>
-				<Typography gutterBottom variant="h6">
-					{element.address}
-				</Typography>
-				<Typography variant="body1" color="textSecondary">
-					Available lots:
-					<Typography
-						className={classes.lots}
-						color={element.availableLots < 5 ? 'error' : 'textSecondary'}>
-						{element.availableLots}
-					</Typography>
-				</Typography>
-				<Typography variant="body1" color="textSecondary">
-					Total lots: {element.totalLots}
-				</Typography>
-				<Typography variant="body1" color="textSecondary">
-					Free parking: {element.freeParking}
-				</Typography>
-				<Typography variant="body1" color="textSecondary">
-					Non-season parking: {element.nonSeasonLot}
-				</Typography>
-			</CardContent>
-		</Card>
+					className="hover:bg-secondary rounded-full mb-1 md:mb-2">
+					<MapDirectionIcon className="h-6 w-6 text-primary" />
+				</button>
+			</div>
+			<div className="">
+				<h1 className="text-lg my-1 normal-case">{element.address}</h1>
+				<div>
+					<h2 className="text-md text-gray-600">
+						Available lots:
+						<span
+							className={`${
+								element.availableLots < 5 ? 'text-red-600' : 'text-green-400'
+							} ml-1`}>
+							{element.availableLots}
+						</span>
+					</h2>
+					<h2 className="text-md text-gray-600">
+						Total lots: {element.totalLots}
+					</h2>
+					<h2 className="text-md text-gray-600">
+						Free parking: {element.freeParking}
+					</h2>
+					<h2 className="text-md text-gray-600">
+						Non-season parking: {element.nonSeasonLot}
+					</h2>
+				</div>
+			</div>
+		</div>
 	);
-}
+};
 
 export default LocationCard;

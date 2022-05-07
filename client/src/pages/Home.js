@@ -4,7 +4,7 @@ import SearchBar from '../components/Search/SearchBar';
 import HomeTrafficCam from '../components/Home/HomeTraficCam';
 import IncidentsTicker from '../components/Home/IncidentsTicker';
 
-import img from '../img/pexels-photo-385997.jpeg';
+import img from '../assets/images/pexels-photo-385997.jpeg';
 
 const Home = ({ handleSubmit, handleChange, query, coe }) => {
 	return (

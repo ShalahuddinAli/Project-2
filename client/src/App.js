@@ -75,7 +75,7 @@ const App = () => {
 		return <h3>Loading...</h3>;
 	}
 	return (
-		<div className="flex flex-col min-h-screen">
+		<div className="flex flex-col min-h-screen w-screen">
 			<Header />
 			<div className="flex-1">
 				<Routes>

@@ -1,51 +1,27 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import { SearchIcon } from '../../assets/Svg';
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		backgroundColor: '#f5f5f5',
-		padding: '2px 4px',
-		display: 'flex',
-		alignItems: 'center',
-		width: '50vw',
-		borderRadius: 20,
-	},
-	input: {
-		marginLeft: theme.spacing(1),
-		flex: 1,
-	},
-	iconButton: {
-		padding: 10,
-	},
-}));
-
-const SearchBar = ({ handleSubmit, query }) => {
-	const classes = useStyles();
+const SearchBar = ({ handleSubmit, isLoading }) => {
 	return (
-		<Box
-			component="form"
-			className={classes.root}
-			boxShadow={6}
-			elevation={6}
+		<form
+			className="flex bg-[#f5f5f5] py-0 px-2 rounded-2xl w-1/2 shadow-lg"
 			onSubmit={(e) => handleSubmit(e)}>
-			<InputBase
-				className={classes.input}
-				placeholder="Search Parking Lots"
-				inputProps={{ 'aria-label': 'search parking lots' }}
+			<input
+				className="w-full rounded-full bg-transparent pl-3 focus:outline-none"
+				placeholder="Search..."
 				name="query"
 				required
 			/>
-			<IconButton
+			<button
 				type="submit"
-				className={classes.iconButton}
+				className=" rounded-full hover:bg-slate-200 "
 				aria-label="search">
-				<SearchIcon />
-			</IconButton>
-		</Box>
+				<SearchIcon
+					className={`h-12 w-12 p-0 text-primary ${
+						isLoading ? 'animate-spin' : 'hover:-rotate-90'
+					}`}
+				/>
+			</button>
+		</form>
 	);
 };
 

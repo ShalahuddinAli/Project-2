@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
 import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 
-import img from '../../img/erp.jpeg';
+import img from '../../assets/images/erp.jpeg';
 
 const useStyles = makeStyles((theme) => ({
 	root: {

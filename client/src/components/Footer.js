@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
-import { ReactComponent as GithubSvg } from '../img/github.svg';
-import { ReactComponent as LinkedinSvg } from '../img/linkedin.svg';
+import { GitHubIcon, LinkedInIcon } from '../assets/Svg';
 
 const Footer = () => {
 	return (
@@ -22,12 +21,12 @@ const Footer = () => {
 				</div>
 				<div className="flex justify-center">
 					<a href="https://github.com/shalahuddinali" className="m-1">
-						<GithubSvg />
+						<GitHubIcon />
 					</a>
 					<a
 						href="https://www.linkedin.com/in/shalahuddin-ali/"
 						className="m-1">
-						<LinkedinSvg />
+						<LinkedInIcon />
 					</a>
 				</div>
 			</div>

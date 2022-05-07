@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import bgImage from '../img/firdouss-ross-pFJtmoDMSAo-unsplash.jpg';
+import bgImage from '../assets/images/roundabout.jpg';
 import { months } from '../utils';
 const AddCoe = ({ coe, setUpdateCoe }) => {
 	const navigate = useNavigate();
