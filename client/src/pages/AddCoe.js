@@ -3,11 +3,15 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import bgImage from '../img/firdouss-ross-pFJtmoDMSAo-unsplash.jpg';
 import { months } from '../utils';
-const AddCoe = ({ coe }) => {
+const AddCoe = ({ coe, setUpdateCoe }) => {
 	const navigate = useNavigate();
 
-	const [period, setPeriod] = useState({ year: '', month: '', quarter: '' });
-	const [coeData, setCoeData] = useState({
+	const [period, setPeriod] = useState({
+		year: new Date().getFullYear(),
+		month: 1,
+		quarter: 1,
+	});
+	const [addCoeData, setAddCoeData] = useState({
 		'Cat A': '',
 		'Cat B': '',
 		'Cat C': '',
@@ -27,7 +31,7 @@ const AddCoe = ({ coe }) => {
 	};
 
 	const handleChange = (event) => {
-		setCoeData((prev) => {
+		setAddCoeData((prev) => {
 			return { ...prev, [event.target.id]: event.target.value };
 		});
 	};
@@ -36,15 +40,23 @@ const AddCoe = ({ coe }) => {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 
-		const reqData = { year, month, quarter, data: coeData };
-		const res = await axios.post('/coe/addCoe', reqData, {
-			withCredentials: true,
-			headers: {
-				'Content-Type': 'application/json',
-				'x-auth-token': localStorage.getItem('token'),
-			},
-		});
-		console.log(res);
+		const reqData = { year, month, quarter, data: addCoeData };
+
+		try {
+			const res = await axios.post('/coe/addCoe', reqData, {
+				withCredentials: true,
+				headers: {
+					'Content-Type': 'application/json',
+					'x-auth-token': localStorage.getItem('token'),
+				},
+			});
+			if (res.status === 201) {
+				navigate('/', { replace: true });
+				setUpdateCoe((prev) => !prev);
+			}
+		} catch (error) {
+			console.error(error.message);
+		}
 	};
 
 	return (
@@ -127,7 +139,7 @@ const AddCoe = ({ coe }) => {
 									type="text"
 									placeholder="$"
 									onChange={handleChange}
-									value={coeData['Cat A']}
+									value={addCoeData['Cat A']}
 								/>
 							</div>
 							<div className="md:w-1/2 px-3 ">
@@ -142,7 +154,7 @@ const AddCoe = ({ coe }) => {
 									type="text"
 									placeholder="$"
 									onChange={handleChange}
-									value={coeData['Cat B']}
+									value={addCoeData['Cat B']}
 								/>
 							</div>
 						</div>
@@ -159,7 +171,7 @@ const AddCoe = ({ coe }) => {
 									type="text"
 									placeholder="$"
 									onChange={handleChange}
-									value={coeData['Cat C']}
+									value={addCoeData['Cat C']}
 								/>
 							</div>
 							<div className="md:w-1/2 px-3">
@@ -174,7 +186,7 @@ const AddCoe = ({ coe }) => {
 									type="text"
 									placeholder="$"
 									onChange={handleChange}
-									value={coeData['Cat D']}
+									value={addCoeData['Cat D']}
 								/>
 							</div>
 							<div className="md:w-1/2 px-3">
@@ -189,7 +201,7 @@ const AddCoe = ({ coe }) => {
 									type="text"
 									placeholder="$"
 									onChange={handleChange}
-									value={coeData['Cat E']}
+									value={addCoeData['Cat E']}
 								/>
 							</div>
 						</div>

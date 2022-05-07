@@ -17,6 +17,7 @@ import Erp from './pages/Erp';
 const App = () => {
 	const auth = localStorage.getItem('token');
 	const [coe, setCoe] = useState('');
+	const [updateCoe, setUpdateCoe] = useState(false);
 	const [loading, setLoading] = useState(false);
 
 	const [queryCpObj, setQueryCpObj] = useState({
@@ -41,7 +42,7 @@ const App = () => {
 			}
 		};
 		getCoe();
-	}, []);
+	}, [updateCoe]);
 
 	useEffect(() => {
 		if (queryCpObj.queryLocation) {
@@ -92,7 +93,12 @@ const App = () => {
 					{/* {auth && ( */}
 					<Route path="/coe" element={<CoeData auth={auth} coe={coe} />} />
 					{/* )} */}
-					<Route path="/add-coe" element={<AddCoe auth={auth} coe={coe} />} />
+					<Route
+						path="/add-coe"
+						element={
+							<AddCoe auth={auth} coe={coe} setUpdateCoe={setUpdateCoe} />
+						}
+					/>
 					<Route path="/about" element={<About />} />
 					<Route path="/contact" element={<Contact />} />
 					<Route
