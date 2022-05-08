@@ -10,15 +10,10 @@ const controller = {
 		const requestLocation = axios.get(
 			`https://data.gov.sg/api/action/datastore_search?resource_id=139a3035-e624-4f56-b63f-89ae28d4ae4c&q={"address":"${req.params.location}"}`
 		);
-		//cpid=dh25
-		//cplocation=clementi ave 4
-		//only provides cp availability with cp no. only
 
 		const requestAvailability = axios.get(
 			`https://api.data.gov.sg/v1/transport/carpark-availability`
 		);
-		//cpid=dh25
-		//avail: 25
 		try {
 			const [data1, data2] = await axios.all([
 				requestLocation,
@@ -49,11 +44,13 @@ const controller = {
 						});
 					}
 				}
-
-				res.json(result);
+				if (!result?.length) {
+					throw new Error(`No result found for ${req.params.location}`);
+				}
+				return res.status(200).json(result);
 			}
 		} catch (error) {
-			res.sendStatus(500);
+			return res.json({ message: error.message });
 		}
 	},
 

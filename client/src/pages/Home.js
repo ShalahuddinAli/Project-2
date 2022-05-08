@@ -6,7 +6,7 @@ import IncidentsTicker from '../components/Home/IncidentsTicker';
 
 import img from '../assets/images/pexels-photo-385997.jpeg';
 
-const Home = ({ handleSubmit, handleChange, query, coe }) => {
+const Home = ({ coe }) => {
 	return (
 		<div className="h-full w-full flex flex-col items-center">
 			<IncidentsTicker />
@@ -19,11 +19,7 @@ const Home = ({ handleSubmit, handleChange, query, coe }) => {
 					backgroundImage: `url(${img})`,
 					backgroundPosition: 'center',
 				}}>
-				<SearchBar
-					handleSubmit={handleSubmit}
-					handleChange={handleChange}
-					query={query}
-				/>
+				<SearchBar />
 			</div>
 
 			<HomeTrafficCam />

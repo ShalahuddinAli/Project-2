@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import Home from './pages/Home';
@@ -13,21 +13,13 @@ import TrafficCam from './pages/TrafficCam';
 import CoeData from './pages/CoeData';
 import AddCoe from './pages/AddCoe';
 import Erp from './pages/Erp';
+import Loading from './pages/Loading';
 
 const App = () => {
 	const auth = localStorage.getItem('token');
 	const [coe, setCoe] = useState('');
 	const [updateCoe, setUpdateCoe] = useState(false);
 	const [loading, setLoading] = useState(false);
-
-	const [queryCpObj, setQueryCpObj] = useState({
-		queryLocation: '',
-		result: [],
-		isLoading: false,
-	});
-
-	const { queryLocation, result, isLoading } = queryCpObj;
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		const getCoe = async () => {
@@ -44,75 +36,30 @@ const App = () => {
 		getCoe();
 	}, [updateCoe]);
 
-	useEffect(() => {
-		if (queryCpObj.queryLocation) {
-			navigate({
-				pathname: '/search_result',
-				search: `?location=${queryLocation}`,
-			});
-			axios
-				.get(`/proxyServer/carpark/${queryLocation}`)
-				.then((res) => {
-					console.log(res.data, 'search');
-					setQueryCpObj({ ...queryCpObj, result: res.data, isLoading: false });
-				})
-				.catch((error) => {
-					console.log(error);
-				});
-		}
-	}, [queryLocation]);
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		setQueryCpObj({
-			result: [],
-			isLoading: true,
-			queryLocation: e.target.query.value,
-		});
-	};
-
 	if (loading) {
-		return <h3>Loading...</h3>;
+		return <Loading />;
 	}
 	return (
 		<div className="flex flex-col min-h-screen w-screen">
 			<Header />
-			<div className="flex-1">
+			<div className="flex-1 flex flex-col h-full">
 				<Routes>
 					{!auth && <Route path="/login" element={<AdminLogin />} />}
-					<Route
-						path="/"
-						element={
-							<Home
-								handleSubmit={handleSubmit}
-								query={queryLocation}
-								coe={coe.data}
-							/>
-						}
-					/>
-					{/* {auth && ( */}
-					<Route path="/coe" element={<CoeData auth={auth} coe={coe} />} />
-					{/* )} */}
-					<Route
-						path="/add-coe"
-						element={
-							<AddCoe auth={auth} coe={coe} setUpdateCoe={setUpdateCoe} />
-						}
-					/>
+					<Route path="/" element={<Home coe={coe.data} />} />
+					{auth && (
+						<Route path="/coe" element={<CoeData auth={auth} coe={coe} />} />
+					)}
+					{auth && (
+						<Route
+							path="/add-coe"
+							element={
+								<AddCoe auth={auth} coe={coe} setUpdateCoe={setUpdateCoe} />
+							}
+						/>
+					)}
 					<Route path="/about" element={<About />} />
 					<Route path="/contact" element={<Contact />} />
-					<Route
-						path="/search_result"
-						element={
-							<SearchResult
-								isLoading={isLoading}
-								query={queryLocation}
-								result={result}
-								handleSubmit={handleSubmit}
-								// handleChange={handleChange}
-							/>
-						}
-					/>
+					<Route path="/search-result" element={<SearchResult />} />
 					<Route path="/traffic_cam" element={<TrafficCam />} />
 					<Route path="/erp" element={<Erp />} />
 					<Route
