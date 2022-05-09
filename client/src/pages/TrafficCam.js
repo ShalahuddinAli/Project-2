@@ -18,7 +18,7 @@ const TrafficCam = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const camImageUrl = '/proxyServer/traffic_cam';
+		const camImageUrl = '/proxyServer/traffic-cam';
 
 		axios
 			.get(camImageUrl)
@@ -73,7 +73,7 @@ const TrafficCam = () => {
 		// query string for traffic cam checkbox
 		navigate(
 			{
-				pathname: '/traffic_cam',
+				pathname: '/traffic-cam',
 				search: qs.stringify({ area: trueArr(checkBox) }),
 			},
 			{ replace: true }

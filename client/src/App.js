@@ -40,7 +40,7 @@ const App = () => {
 		return <Loading />;
 	}
 	return (
-		<div className="flex flex-col min-h-screen w-screen">
+		<div className="flex flex-col min-h-screen w-screen ">
 			<Header />
 			<div className="flex-1 flex flex-col h-full">
 				<Routes>
@@ -60,7 +60,7 @@ const App = () => {
 					<Route path="/about" element={<About />} />
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/search-result" element={<SearchResult />} />
-					<Route path="/traffic_cam" element={<TrafficCam />} />
+					<Route path="/traffic-cam" element={<TrafficCam />} />
 					<Route path="/erp" element={<Erp />} />
 					<Route
 						path="*"

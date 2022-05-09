@@ -10,6 +10,11 @@ module.exports = {
 				secondary: '#EDB95D',
 				coe: '#EDB95D',
 				hot: '#E8492F',
+				mistyrose: '#FFE4E1',
+			},
+			backgroundImage: {
+				surveillance: "url('/client/src/assets/images/trafficCam.jpeg')",
+				erp: "url('/client/src/assets/images/erp.jpeg')",
 			},
 		},
 

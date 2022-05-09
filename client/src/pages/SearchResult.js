@@ -1,7 +1,7 @@
+import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import axios from 'axios';
-// import Loading from '../components/Loading';
+
 import SearchBar from '../components/Search/SearchBar';
 import LocationCard from '../components/Search/LocationCard';
 
@@ -23,7 +23,6 @@ const SearchResult = () => {
 			try {
 				const res = await axios.get(`/proxyServer/carpark/${query}`);
 
-				console.log(res);
 				if (!res?.data?.length) {
 					throw new Error(res.data.message);
 				}
@@ -32,7 +31,6 @@ const SearchResult = () => {
 					setError(null);
 				}
 			} catch (err) {
-				console.log(err.message, 'dataaa');
 				if (mounted) {
 					setResult([]);
 					setError(err);
@@ -78,8 +76,8 @@ const SearchResult = () => {
 					</h2>
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
-						{result.map((element, index) => (
-							<LocationCard element={element} key={index} />
+						{result.map((carpark, index) => (
+							<LocationCard carpark={carpark} key={index} />
 						))}
 					</div>
 				</div>

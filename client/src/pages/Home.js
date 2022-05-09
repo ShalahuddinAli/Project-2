@@ -1,7 +1,7 @@
 import HomeErp from '../components/Home/HomeErp';
 import CoeInfo from '../components/Home/CoeInfo';
 import SearchBar from '../components/Search/SearchBar';
-import HomeTrafficCam from '../components/Home/HomeTraficCam';
+import HomeTrafficCam from '../components/Home/HomeTrafficCam';
 import IncidentsTicker from '../components/Home/IncidentsTicker';
 
 import img from '../assets/images/pexels-photo-385997.jpeg';

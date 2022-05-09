@@ -4,21 +4,22 @@ import Ticker, { NewsTicker } from 'nice-react-ticker';
 
 const GetNews = () => {
 	const [news, setNews] = useState('');
-	useEffect(() => {
-		axios
-			.get('/proxyServer/traffic_news')
-			.then((res) => {
-				setNews(res.data);
-				console.log(res.data, 'incidents');
-			})
-			.catch((err) => {
-				console.error(err, 'incident');
-			});
-	}, []);
 
 	useEffect(() => {
-		console.log(news, 'hello');
-	}, [news]);
+		const getTrafficNews = async () => {
+			try {
+				const { data } = await axios.get('/proxyServer/traffic-news');
+				setNews(data);
+			} catch (error) {
+				console.error(error, 'incident');
+			}
+		};
+		getTrafficNews();
+	}, []);
+
+	// useEffect(() => {
+	// 	console.log(news, 'hello');
+	// }, [news]);
 
 	return news ? (
 		news.map((item, index) => (

@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import TrendUp from '@heroicons/react/outline/ChevronDoubleUpIcon';
 import TrendDown from '@heroicons/react/outline/ChevronDoubleDownIcon';
 import { numberWithCommas } from '../../utils';

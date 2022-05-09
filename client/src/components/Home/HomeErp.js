@@ -1,75 +1,39 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-
-import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
+import { Link } from 'react-router-dom';
 
 import img from '../../assets/images/erp.jpeg';
+import { ArrowRightIcon } from '../../assets/Svg';
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		height: '70vh',
-		marginBottom: '10vh',
-	},
-	image: {
-		background: `radial-gradient(circle at center, transparent, mistyrose), url(${img})`,
-		borderRadius: '50%',
-		backgroundPosition: 'center',
-	},
-	itemContainer: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	title: {
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	desc: {
-		display: 'flex',
-		flexDirection: 'column',
-		alignItems: 'center',
-	},
-	link: {
-		display: 'flex',
-		alignItems: 'center',
-		'&:hover': {
-			transition: '100ms',
-			fontSize: 'large',
-		},
-	},
-}));
-const HomeErp = ({ element }) => {
-	const classes = useStyles();
+const HomeErp = () => {
 	return (
-		<Grid container component="main" className={classes.root}>
-			<Grid item xs={6} className={classes.image} />
-			<Grid
-				item
-				container
-				xs={6}
-				direction="column"
-				className={classes.itemContainer}>
-				<Grid item className={classes.title} xs={6}>
-					<Typography component="h1" variant="h4">
+		<div className=" w-full flex flex-row m-20 p-4" style={{ height: '65vh' }}>
+			<div
+				className="flex h-auto w-full bg-cover"
+				style={{
+					background: `radial-gradient(circle at center, transparent, mistyrose), url(${img})`,
+					borderRadius: '50%',
+				}}></div>
+
+			<div className="h-full w-full ml-6 px-5 flex flex-col justify-center">
+				<div className="mb-5">
+					<h2 className="text-2xl md:text-3xl xl:text-4xl">
 						Electronic Road Pricing(ERP)
-					</Typography>
-				</Grid>
-				<Grid item className={classes.desc} xs={6}>
-					<Typography component="h1" variant="h5">
+					</h2>
+				</div>
+				<div>
+					<p className="text-lg mb-3 md:text-xl xl:text-2xl">
 						Check the Electronic Road Pricing (ERP) rates for different roads at
 						specific times of the day.
-					</Typography>
-					<Link component={RouterLink} to="/erp" className={classes.link}>
-						Find out more <ArrowForwardIcon fontSize="small" />
+					</p>
+					<Link
+						to="/erp"
+						className="inline-flex text-lg md:text-xl xl:text-2xl text-blue-600 tracking-tighter w-auto">
+						<span>Find out more</span>
+						<ArrowRightIcon className="h-6 w-6 mt-1 p-0 m-0" />
 					</Link>
-				</Grid>
-			</Grid>
-		</Grid>
+				</div>
+			</div>
+		</div>
 	);
 };
 

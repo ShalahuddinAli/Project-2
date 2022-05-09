@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
 import { MapDirectionIcon } from '../../assets/Svg';
-const LocationCard = ({ element }) => {
+
+const LocationCard = ({ carpark }) => {
 	const [mapRedirectObj, setMapRedirectObj] = useState({
 		xCoord: '',
 		yCoord: '',
 	});
 
-	const url = `https://developers.onemap.sg/commonapi/convert/3414to4326?X=${element.xCoord}&Y=${element.yCoord}`;
+	const url = `https://developers.onemap.sg/commonapi/convert/3414to4326?X=${carpark.xCoord}&Y=${carpark.yCoord}`;
 
 	useEffect(() => {
 		axios.get(url).then((res) => {
@@ -30,25 +32,25 @@ const LocationCard = ({ element }) => {
 				</button>
 			</div>
 			<div className="">
-				<h1 className="text-lg my-1 normal-case">{element.address}</h1>
+				<h1 className="text-lg my-1 normal-case">{carpark.address}</h1>
 				<div>
 					<h2 className="text-md text-gray-600">
 						Available lots:
 						<span
 							className={`${
-								element.availableLots < 5 ? 'text-red-600' : 'text-green-400'
+								carpark.availableLots < 5 ? 'text-red-600' : 'text-green-400'
 							} ml-1`}>
-							{element.availableLots}
+							{carpark.availableLots}
 						</span>
 					</h2>
 					<h2 className="text-md text-gray-600">
-						Total lots: {element.totalLots}
+						Total lots: {carpark.totalLots}
 					</h2>
 					<h2 className="text-md text-gray-600">
-						Free parking: {element.freeParking}
+						Free parking: {carpark.freeParking}
 					</h2>
 					<h2 className="text-md text-gray-600">
-						Non-season parking: {element.nonSeasonLot}
+						Non-season parking: {carpark.nonSeasonLot}
 					</h2>
 				</div>
 			</div>
