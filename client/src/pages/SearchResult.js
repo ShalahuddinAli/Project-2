@@ -16,29 +16,39 @@ const SearchResult = () => {
 	useEffect(() => {
 		const controller = new AbortController();
 
-		const getQueryData = async () => {
-			setResult([]);
-			setError(null);
-			setLoading(true);
-			try {
-				const res = await axios.get(`/proxyServer/carpark/${query}`);
-
-				if (!res?.data?.length) {
-					throw new Error(res.data.message);
-				}
-				setResult(res.data);
-			} catch (err) {
+		if (query !== null) {
+			const getQueryData = async () => {
 				setResult([]);
-				setError(err);
-			} finally {
-				setLoading(false);
-			}
-		};
-		getQueryData();
+				setError(null);
+				setLoading(true);
+				try {
+					const res = await axios.get(`/proxyServer/carpark/${query}`);
+
+					if (!res?.data?.length) {
+						throw new Error(res.data.message);
+					}
+					setResult(res.data);
+				} catch (err) {
+					setResult([]);
+					setError(err);
+				} finally {
+					setLoading(false);
+				}
+			};
+			getQueryData();
+		}
 		return () => {
 			controller.abort();
 		};
 	}, [query]);
+
+	const NoQuery = () => {
+		return (
+			<div className="flex mt-64 justify-center items-center text-lg">
+				<h1>Please key in a query</h1>
+			</div>
+		);
+	};
 
 	const LoadingComponent = () => {
 		return (
@@ -61,9 +71,10 @@ const SearchResult = () => {
 			<div className="flex justify-center mt-5">
 				<SearchBar loading={loading} />
 			</div>
-			{loading && <LoadingComponent />}
-			{error && <ErrorComponent />}
-			{!loading && !error && (
+			{loading ? <LoadingComponent /> : null}
+			{error ? <ErrorComponent /> : null}
+			{query === null && !loading && !error ? <NoQuery /> : null}
+			{!loading && !error && query !== null ? (
 				<div className="mx-1 md:mx-6">
 					<h2 variant="h4" className="mt-6 mx-3 text-xl md:text-2xl">
 						{`Showing results for "${query}"`}
@@ -75,7 +86,7 @@ const SearchResult = () => {
 						))}
 					</div>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 };

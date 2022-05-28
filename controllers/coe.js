@@ -16,22 +16,22 @@ const controller = {
 
 		const queryParams = {};
 
-		if (quarter === 2) {
-			queryParams.quarter = 1;
+		if (quarter === '2') {
+			queryParams.quarter = '1';
 			queryParams.year = year;
 			queryParams.month = month;
 		}
 
-		if (quarter === 1 && month > 1) {
-			queryParams.quarter = 2;
+		if (quarter === '1' && month > '1') {
+			queryParams.quarter = '2';
 			queryParams.year = year;
-			queryParams.month = month - 1;
+			queryParams.month = String(parseInt(month) - 1);
 		}
 
-		if (quarter === 1 && month === 1) {
-			queryParams.quarter = 2;
-			queryParams.year = year - 1;
-			queryParams.month = month - 1;
+		if (quarter === '1' && month === '1') {
+			queryParams.quarter = '2';
+			queryParams.year = String(parseInt(year) - 1);
+			queryParams.month = String(parseInt(month) - 1);
 		}
 
 		let prevData;

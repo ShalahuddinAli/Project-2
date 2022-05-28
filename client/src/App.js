@@ -17,7 +17,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 const App = () => {
-	const auth = localStorage.getItem('token');
+	const [auth, setAuth] = useState(localStorage.getItem('token') || null);
 	const [coe, setCoe] = useState('');
 	const [updateCoe, setUpdateCoe] = useState(false);
 	const [loading, setLoading] = useState(false);
@@ -42,22 +42,24 @@ const App = () => {
 	}
 	return (
 		<div className="flex flex-col min-h-screen w-screen ">
-			<Header />
+			<Header auth={auth} setAuth={setAuth} />
 			<div className="flex-1 flex flex-col h-full">
 				<Routes>
-					{!auth && <Route path="/login" element={<AdminLogin />} />}
+					{!auth ? (
+						<Route path="/login" element={<AdminLogin setAuth={setAuth} />} />
+					) : null}
 					<Route path="/" element={<Home coe={coe.data} />} />
-					{auth && (
+					{auth ? (
 						<Route path="/coe" element={<CoeData auth={auth} coe={coe} />} />
-					)}
-					{auth && (
+					) : null}
+					{auth ? (
 						<Route
 							path="/add-coe"
 							element={
 								<AddCoe auth={auth} coe={coe} setUpdateCoe={setUpdateCoe} />
 							}
 						/>
-					)}
+					) : null}
 					<Route path="/about" element={<About />} />
 					<Route path="/contact" element={<Contact />} />
 					<Route path="/search-result" element={<SearchResult />} />

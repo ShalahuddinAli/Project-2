@@ -41,6 +41,7 @@ const AddCoe = ({ coe, setUpdateCoe }) => {
 		event.preventDefault();
 
 		const reqData = { year, month, quarter, data: addCoeData };
+		console.log(reqData);
 
 		try {
 			const res = await axios.post('/coe/addCoe', reqData, {

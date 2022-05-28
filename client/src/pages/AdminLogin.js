@@ -63,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AdminLogin = () => {
+const AdminLogin = ({ setAuth }) => {
 	const classes = useStyles();
 	const [admin, setAdmin] = useState({ username: '', password: '' });
 	const [loading, setLoading] = useState(false);
@@ -87,7 +87,8 @@ const AdminLogin = () => {
 				console.log(res.data);
 				if (res.data.accessToken) {
 					localStorage.setItem('token', res.data.accessToken);
-					navigate('/');
+					setAuth(localStorage.getItem('token'));
+					navigate('/', { replace: true, state: admin });
 				} else {
 					setSuccess({ status: false, message: res.data });
 					console.log(res.data);

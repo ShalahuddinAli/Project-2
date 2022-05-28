@@ -1,16 +1,14 @@
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 
-const Header = () => {
+const Header = ({ auth, setAuth }) => {
 	const navigate = useNavigate();
-	const auth = localStorage.getItem('token');
 
 	const handleClick = async (e) => {
 		e.preventDefault();
 
 		if (auth) {
-			console.log('hrllooo');
-			const data = await axios.post(
+			const response = await axios.post(
 				'/admin/logout',
 				{},
 				{
@@ -22,6 +20,7 @@ const Header = () => {
 				}
 			);
 			localStorage.removeItem('token');
+			setAuth(null);
 			navigate('/', { replace: true });
 		} else {
 			navigate('/login', { replace: true });
@@ -58,13 +57,13 @@ const Header = () => {
 					className="m-0.5 text-xs hover:underline md:text-base md:m-2">
 					Contact
 				</Link>
-				{auth && (
+				{auth ? (
 					<Link
 						to="/coe"
 						className="m-0.5 text-xs hover:underline md:text-base md:m-2">
 						COE
 					</Link>
-				)}
+				) : null}
 			</nav>
 		</header>
 	);
