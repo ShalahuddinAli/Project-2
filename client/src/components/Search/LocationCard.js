@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { MapDirectionIcon } from '../../assets/Svg';
 
@@ -9,25 +9,47 @@ const LocationCard = ({ carpark }) => {
 		yCoord: '',
 	});
 
+	//to convert local gps coordinate to internationally recognised coordinate
 	const url = `https://developers.onemap.sg/commonapi/convert/3414to4326?X=${carpark.xCoord}&Y=${carpark.yCoord}`;
 
 	useEffect(() => {
-		axios.get(url).then((res) => {
-			setMapRedirectObj({
-				xCoord: res.data.latitude,
-				yCoord: res.data.longitude,
-			});
-		});
-	}, []);
+		const controller = new AbortController();
+
+		const convertCoords = async () => {
+			try {
+				const { data } = await axios.get(url);
+
+				setMapRedirectObj({
+					xCoord: data.latitude,
+					yCoord: data.longitude,
+				});
+			} catch (error) {
+				console.error(error);
+				setMapRedirectObj({
+					xCoord: '',
+					yCoord: '',
+				});
+			}
+		};
+		convertCoords();
+		return () => {
+			controller.abort();
+		};
+	}, [url]);
+
+	const handleDirection = () => {
+		window.open(
+			`https://www.google.com/maps?saddr=My+Location&daddr=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`,
+			'_blank'
+		);
+	};
 
 	return (
 		<div className="border-2 m-4 p-4 h-64 rounded-lg shadow-lg">
 			<div className="flex justify-end flex-row">
 				<button
-					href={`https://www.google.com/maps?saddr=My+Location&daddr=${mapRedirectObj.xCoord},${mapRedirectObj.yCoord}`}
-					target="_blank"
-					edge="start"
-					className="hover:bg-secondary rounded-full mb-1 md:mb-2">
+					onClick={handleDirection}
+					className="hover:bg-secondary rounded-full mb-1 md:mb-2 focus:normal-case">
 					<MapDirectionIcon className="h-6 w-6 text-primary" />
 				</button>
 			</div>

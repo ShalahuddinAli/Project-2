@@ -1,5 +1,5 @@
-import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
 	const navigate = useNavigate();
@@ -33,7 +33,7 @@ const Header = () => {
 				<button className="ml-2 px-2 py-1 md:ml-5 bg-primary text-xs md:text-base border-black rounded-md md:p-2 hover:shadow">
 					Subscribe
 				</button>
-				<h1 className="text-xl font-cinzel align-text-bottom md:text-2xl">
+				<h1 className="text-xl font-cinzel text-center md:text-2xl">
 					Parking Hunter
 				</h1>
 				<button

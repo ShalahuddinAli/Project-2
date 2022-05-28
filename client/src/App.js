@@ -1,19 +1,20 @@
 import axios from 'axios';
+import { useState, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
-import './App.css';
+
+import Erp from './pages/Erp';
 import Home from './pages/Home';
-import Header from './components/Header';
-import Footer from './components/Footer';
 import About from './pages/About';
+import AddCoe from './pages/AddCoe';
+import Loading from './pages/Loading';
+import CoeData from './pages/CoeData';
 import Contact from './pages/Contact';
 import AdminLogin from './pages/AdminLogin';
-import SearchResult from './pages/SearchResult';
 import TrafficCam from './pages/TrafficCam';
-import CoeData from './pages/CoeData';
-import AddCoe from './pages/AddCoe';
-import Erp from './pages/Erp';
-import Loading from './pages/Loading';
+import SearchResult from './pages/SearchResult';
+
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
 	const auth = localStorage.getItem('token');

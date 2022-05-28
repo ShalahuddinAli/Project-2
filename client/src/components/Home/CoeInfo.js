@@ -10,15 +10,15 @@ const CoeInfo = ({ coe }) => {
 
 		if (changes > 0)
 			return (
-				<TrendUp className="h-4 text-red-600 mt-0.5 align-bottom md:text-base md:h-8" />
+				<TrendUp className="h-3 text-red-600 mt-0.5 align-bottom lg:text-base lg:h-8" />
 			);
 		if (changes < 0)
 			return (
-				<TrendDown className="h-4 text-green-600 mt-0.5 md:text-base md:h-6" />
+				<TrendDown className="h-3 text-green-600 mt-0.5 lg:text-base lg:h-6" />
 			);
 		if (changes === 0)
 			return (
-				<span className="h-4 mt-0.5 align-bottom md:text-base md:h-8">-</span>
+				<span className="h-3 mt-0.5 align-bottom lg:text-base lg:h-8">-</span>
 			);
 	};
 
@@ -29,36 +29,36 @@ const CoeInfo = ({ coe }) => {
 		if (changes === 0) return 'text-black';
 	};
 	return (
-		<div className="flex flex-col w-full items-center md:flex-row md:my-8 md:w-11/12">
+		<div className="flex flex-col w-full sm:w-6/12 items-center lg:flex-row lg:my-8 lg:w-11/12">
 			{coe.map((item) => (
 				<div
 					key={item._id}
-					className="my-2 w-full md:m-3 md:shadow-xl md:border md:rounded-lg">
-					<div className="flex bg-coe justify-center md:flex-col md:items-center md:h-20 md:rounded-t-lg customcoe:h-14">
-						<p className="text-xs md:text-base">{item.category}</p>
-						<p className="text-xs md:px-2">({item.descriptions})</p>
+					className="my-2 w-full lg:m-3 lg:shadow-xl lg:border lg:rounded-lg">
+					<div className="sm:border-2 flex bg-coe justify-center lg:flex-col lg:items-center lg:h-20 lg:rounded-t-lg customcoe:h-14">
+						<p className="text-xs sm:text-sm lg:text-base">{item.category}</p>
+						<p className="text-xs sm:text-sm lg:px-2">({item.descriptions})</p>
 					</div>
-					<div className="flex justify-around pt-3 md:py-5">
-						<div className="flex md:flex-col md:justify-center">
-							<p className="text-sm md:hidden">Change:</p>
+					<div className="sm:border-2 flex justify-around lg:pt-3 lg:py-5">
+						<div className="flex lg:flex-col lg:justify-center">
+							<p className="text-xs lg:hidden">Change:</p>
 							{changeSymbol(item.current_premium, item.prev_premium)}
 							<p
-								className={`text-sm ${changeTextStyle(
+								className={`text-xs ${changeTextStyle(
 									item.current_premium,
 									item.prev_premium
-								)} w-14 text-left md:text-center md:text-xs`}>
+								)} w-14 text-left lg:text-center lg:text-xs`}>
 								$
 								{numberWithCommas(
 									coeChanges(item.current_premium, item.prev_premium)
 								)}
 							</p>
 						</div>
-						<div className="flex md:flex-col">
-							<p className="text-sm md:hidden">Quota Premium:</p>
-							<p className="text-sm md:text-lg md:text-center">
+						<div className="flex lg:flex-col">
+							<p className="text-xs lg:hidden">Quota Premium:</p>
+							<p className="text-xs lg:text-base lg:text-center lg:text-lg">
 								${numberWithCommas(item.current_premium)}
 							</p>
-							<p className="text-xs hidden md:inline-flex text-center">
+							<p className="text-xs hidden lg:inline-flex text-center">
 								(Quota Premium)
 							</p>
 						</div>

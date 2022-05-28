@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useEffect, useState } from 'react';
 import Ticker, { NewsTicker } from 'nice-react-ticker';
 
 const GetNews = () => {
@@ -16,10 +16,6 @@ const GetNews = () => {
 		};
 		getTrafficNews();
 	}, []);
-
-	// useEffect(() => {
-	// 	console.log(news, 'hello');
-	// }, [news]);
 
 	return news ? (
 		news.map((item, index) => (

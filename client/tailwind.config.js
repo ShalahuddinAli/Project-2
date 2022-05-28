@@ -12,10 +12,6 @@ module.exports = {
 				hot: '#E8492F',
 				mistyrose: '#FFE4E1',
 			},
-			backgroundImage: {
-				surveillance: "url('/client/src/assets/images/trafficCam.jpeg')",
-				erp: "url('/client/src/assets/images/erp.jpeg')",
-			},
 		},
 
 		screens: {

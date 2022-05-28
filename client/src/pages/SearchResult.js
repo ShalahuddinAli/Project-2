@@ -14,11 +14,11 @@ const SearchResult = () => {
 	const query = searchParams.get('location');
 
 	useEffect(() => {
-		let mounted = true;
 		const controller = new AbortController();
 
 		const getQueryData = async () => {
 			setResult([]);
+			setError(null);
 			setLoading(true);
 			try {
 				const res = await axios.get(`/proxyServer/carpark/${query}`);
@@ -26,22 +26,16 @@ const SearchResult = () => {
 				if (!res?.data?.length) {
 					throw new Error(res.data.message);
 				}
-				if (mounted) {
-					setResult(res.data);
-					setError(null);
-				}
+				setResult(res.data);
 			} catch (err) {
-				if (mounted) {
-					setResult([]);
-					setError(err);
-				}
+				setResult([]);
+				setError(err);
 			} finally {
-				mounted && setLoading(false);
+				setLoading(false);
 			}
 		};
 		getQueryData();
 		return () => {
-			mounted = false;
 			controller.abort();
 		};
 	}, [query]);

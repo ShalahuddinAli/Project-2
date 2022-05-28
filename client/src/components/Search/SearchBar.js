@@ -16,7 +16,7 @@ const SearchBar = ({ loading }) => {
 			},
 			{ replace: true }
 		);
-		queryRef.current.value = '';
+		queryRef.current.value = null;
 	};
 	return (
 		<form
