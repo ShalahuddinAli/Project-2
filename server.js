@@ -1,12 +1,17 @@
 const path = require('path');
 const cors = require('cors');
+const admZip = require('adm-zip');
+const axios = require('axios');
 const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 
+const csv2json = require('csvtojson');
+
 const coeRouter = require('./routes/coe');
 const proxyRouter = require('./routes/proxy');
 const adminRouter = require('./routes/admin');
+const res = require('express/lib/response');
 
 require('dotenv').config();
 
@@ -25,6 +30,26 @@ mongoose.connect(mongoURI, {
 
 mongoose.connection.once('open', () => {
 	console.log('Connected to mongoose...');
+});
+
+app.get('/test', async (_req, res) => {
+	const { data } = await axios.get(
+		'https://datamall.lta.gov.sg/content/dam/datamall/datasets/Facts_Figures/Vehicle Registration/COE Bidding Results.zip',
+		{
+			responseType: 'arraybuffer',
+		}
+	);
+	const zip = new admZip(data);
+	const zipEntries = zip.getEntries();
+	zipEntries.forEach((entry) => {
+		// console.log(entry.toString(), 'hello');
+		if (entry.entryName === 'COE Bidding Results/M11-coe_results.csv') {
+			const csv = entry.getData().toString();
+			const lines = csv.split('\r\n');
+			lines.pop();
+			res.json(lines);
+		}
+	});
 });
 
 app.use('/proxyServer', proxyRouter);

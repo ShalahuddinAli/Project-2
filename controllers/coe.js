@@ -1,10 +1,18 @@
 const CoeModel = require('../models/Coe');
 
 const controller = {
+	getAllCoe: async (_req, res) => {
+		try {
+			const data = await CoeModel.find({});
+			return res.status(200).json(data);
+		} catch (error) {
+			return res.status(500).json(error);
+		}
+	},
 	getCoe: async (_req, res) => {
 		try {
 			const data = await CoeModel.findOne().sort({ _id: -1 }).exec();
-			res.status(200).json(data);
+			return res.status(200).json(data);
 		} catch (error) {
 			return res.status(500).json(error);
 		}
