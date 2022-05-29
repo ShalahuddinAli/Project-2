@@ -42,7 +42,7 @@ const SearchResult = () => {
 		};
 	}, [query]);
 
-	const NoQuery = () => {
+	const NoQueryComponent = () => {
 		return (
 			<div className="flex mt-64 justify-center items-center text-lg">
 				<h1>Please key in a query</h1>
@@ -73,7 +73,7 @@ const SearchResult = () => {
 			</div>
 			{loading ? <LoadingComponent /> : null}
 			{error ? <ErrorComponent /> : null}
-			{query === null && !loading && !error ? <NoQuery /> : null}
+			{query === null && !loading && !error ? <NoQueryComponent /> : null}
 			{!loading && !error && query !== null ? (
 				<div className="mx-1 md:mx-6">
 					<h2 variant="h4" className="mt-6 mx-3 text-xl md:text-2xl">

@@ -41,22 +41,28 @@ const CoeInfo = ({ coe }) => {
 					<div className="sm:border-2 flex justify-around lg:pt-3 lg:py-5">
 						<div className="flex lg:flex-col lg:justify-center">
 							<p className="text-xs lg:hidden">Change:</p>
-							{changeSymbol(item.current_premium, item.prev_premium)}
+							{changeSymbol(
+								parseInt(item.current_premium),
+								parseInt(item.prev_premium)
+							)}
 							<p
 								className={`text-xs ${changeTextStyle(
-									item.current_premium,
-									item.prev_premium
+									parseInt(item.current_premium),
+									parseInt(item.prev_premium)
 								)} w-14 text-left lg:text-center lg:text-xs`}>
 								$
 								{numberWithCommas(
-									coeChanges(item.current_premium, item.prev_premium)
+									coeChanges(
+										parseInt(item.current_premium),
+										parseInt(item.prev_premium)
+									)
 								)}
 							</p>
 						</div>
 						<div className="flex lg:flex-col">
 							<p className="text-xs lg:hidden">Quota Premium:</p>
-							<p className="text-xs lg:text-base lg:text-center lg:text-lg">
-								${numberWithCommas(item.current_premium)}
+							<p className="text-xs lg:text-center lg:text-lg">
+								${numberWithCommas(parseInt(item.current_premium))}
 							</p>
 							<p className="text-xs hidden lg:inline-flex text-center">
 								(Quota Premium)

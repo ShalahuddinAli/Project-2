@@ -52,8 +52,8 @@ const AddCoe = ({ coe, setUpdateCoe }) => {
 				},
 			});
 			if (res.status === 201) {
-				navigate('/', { replace: true });
 				setUpdateCoe((prev) => !prev);
+				navigate('/', { replace: true });
 			}
 		} catch (error) {
 			console.error(error.message);

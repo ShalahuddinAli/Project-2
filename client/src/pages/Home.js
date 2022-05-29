@@ -11,7 +11,7 @@ const Home = ({ coe }) => {
 		<div className="h-full w-full flex flex-col items-center">
 			<IncidentsTicker />
 
-			{coe && <CoeInfo coe={coe} />}
+			{coe ? <CoeInfo coe={coe} /> : null}
 
 			<div
 				className="h-[32rem] w-10/12 flex justify-center items-center my-4 border border-black "
